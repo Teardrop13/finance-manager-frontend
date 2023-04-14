@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+:root {
+    --main-color-rgb: 150, 174, 255;
+    --main-color: rgb(var(--main-color-rgb));
+
+    --primary-color-rgb: 31, 82, 253;
+    --primary-color: rgb(var(--primary-color-rgb));
+
+    --accent-color-rgb: 255, 231, 150;
+    --accent-color: rgb(var(--accent-color-rgb));
+
+    --background-alpha: 0.1;
+    --background-color: rgba(var(--main-color-rgb), var(--background-alpha));
+
+    --error-color-rgb: 212, 46, 446;
+    --error-color: rgb(var(--error-color-rgb));
+
+    --border-radius: 5px;
+
+    --font-size: 12pt;
+    --secondary-font-size: 0.8em;
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+body * {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: var(--font-size);
+}
+
+input:focus {
+    outline-offset: 0px;
+    outline-width: 2px;
+    outline-style: solid;
+}
+
+.btn {
+    background-color: var(--primary-color);
+    border: 0px;
+    width: 100px;
+    border-radius: var(--border-radius);
+    padding: 10px 20px 10px 20px;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 70%;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

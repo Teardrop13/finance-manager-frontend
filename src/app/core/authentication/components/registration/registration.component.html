@@ -1,0 +1,36 @@
+<form class="form" role="register" (submit)="register()">
+  <div>
+    <input type="text"
+           class="form-input"
+           id="username"
+           name="new-username"
+           autocomplete="new-username"
+           placeholder="Username"
+           [(ngModel)]="registerRequest.username" />
+    <div class="error-box" #usernameError></div>
+  </div>
+  <div>
+    <input type="email"
+           class="form-input"
+           id="email"
+           name="new-email"
+           autocomplete="new-email"
+           placeholder="Email"
+           [(ngModel)]="registerRequest.email" />
+    <div class="error-box" #emailError></div>
+  </div>
+  <div>
+    <input type="password"
+           class="form-input"
+           id="password"
+           name="new-password"
+           autocomplete="new-password"
+           placeholder="Password"
+           [(ngModel)]="registerRequest.password" />
+    <div class="error-box" #passwordError></div>
+  </div>
+  <button type="submit" class="submit-btn">Sign up</button>
+  <div>
+    Already have an account? <a href="login" class="link-btn">Log in</a>
+  </div>
+</form>

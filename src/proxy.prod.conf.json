@@ -1,0 +1,6 @@
+{
+    "/api/*": {
+        "target": "https://fm.teardrop.pl/api",
+        "secure": false
+    }
+}

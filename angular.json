@@ -87,10 +87,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "finance-manager-frontend:build:production"
+              "browserTarget": "finance-manager-frontend:build:production",
+              "proxyConfig": "src/proxy.prod.conf.json"
             },
             "development": {
-              "browserTarget": "finance-manager-frontend:build:development"
+              "browserTarget": "finance-manager-frontend:build:development",
+              "proxyConfig": "src/proxy.dev.conf.json"
             }
           },
           "defaultConfiguration": "development"
