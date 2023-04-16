@@ -13,7 +13,7 @@ export class AuthenticationService {
     private router: Router) {}
 
   login(loginRequest: LoginRequest) {
-    this.http.post<LoginResponse>('/api/login', loginRequest).subscribe(
+    this.http.post<LoginResponse>('/api/auth/login', loginRequest).subscribe(
       {
         next: res => {
           let token = res.sessionId
@@ -30,7 +30,7 @@ export class AuthenticationService {
   }
 
   register(registerRequest: RegisterRequest): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>('/api/register', registerRequest);
+    return this.http.post<RegisterResponse>('/api/auth/register', registerRequest);
   }
 
   isAuthenticated(): boolean {

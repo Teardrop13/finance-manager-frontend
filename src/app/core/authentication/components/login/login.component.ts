@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginRequest } from '@core/authentication/models/authentication.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
 
 @Component({
@@ -9,7 +9,10 @@ import { AuthenticationService } from '@core/authentication/services/authenticat
 })
 export class LoginComponent implements OnInit {
 
-  loginRequest: LoginRequest = { username: "", password: "" };
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+  });
 
   constructor(private authentication: AuthenticationService) {}
 
@@ -17,7 +20,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authentication.login(this.loginRequest);
+    if (this.loginForm.valid) {
+      this.authentication.login(this.loginForm.value);
+    }
   }
 
 }

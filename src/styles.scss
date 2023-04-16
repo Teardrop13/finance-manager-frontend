@@ -9,11 +9,62 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
+$primary-palette: (
+ 50: #e1ecfd,
+ 100: #b3d0fa,
+ 200: #81b1f7,
+ 300: #4e91f3,
+ 400: #287af1,
+ 500: #0262ee,
+ 600: #025aec,
+ 700: #0150e9,
+ 800: #0146e7,
+ 900: #0134e2,
+ contrast: (
+   50: rgba(black, 0.87),
+   100: rgba(black, 0.87),
+   200: rgba(black, 0.87),
+   300: rgba(black, 0.87),
+   400: rgba(black, 0.87),
+   500: white,
+   600: white,
+   700: white,
+   800: white,
+   900: white,
+ )
+);
+
+
+$accent-palette: (
+ 50: #feeee0,
+ 100: #fcd4b3,
+ 200: #fab880,
+ 300: #f79c4d,
+ 400: #f68626,
+ 500: #f47100,
+ 600: #f36900,
+ 700: #f15e00,
+ 800: #ef5400,
+ 900: #ec4200,
+ contrast: (
+   50: rgba(black, 0.87),
+   100: rgba(black, 0.87),
+   200: rgba(black, 0.87),
+   300: rgba(black, 0.87),
+   400: rgba(black, 0.87),
+   500: white,
+   600: white,
+   700: white,
+   800: white,
+   900: white,
+ )
+);
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$finance-manager-frontend-primary: mat.define-palette(mat.$indigo-palette);
-$finance-manager-frontend-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$finance-manager-frontend-primary: mat.define-palette($primary-palette);
+$finance-manager-frontend-accent: mat.define-palette($accent-palette, 500, 200, 800);
 
 // The warn palette is optional (defaults to red).
 $finance-manager-frontend-warn: mat.define-palette(mat.$red-palette);
@@ -33,57 +84,11 @@ $finance-manager-frontend-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($finance-manager-frontend-theme);
 
-/* You can add global styles to this file, and also import other style files */
-
-
-:root {
-    --main-color-rgb: 150, 174, 255;
-    --main-color: rgb(var(--main-color-rgb));
-
-    --primary-color-rgb: 31, 82, 253;
-    --primary-color: rgb(var(--primary-color-rgb));
-
-    --accent-color-rgb: 255, 231, 150;
-    --accent-color: rgb(var(--accent-color-rgb));
-
-    --background-alpha: 0.1;
-    --background-color: rgba(var(--main-color-rgb), var(--background-alpha));
-
-    --error-color-rgb: 212, 46, 446;
-    --error-color: rgb(var(--error-color-rgb));
-
-    --border-radius: 5px;
-
-    --font-size: 12pt;
-    --secondary-font-size: 0.8em;
-}
-
-body {
+/*body {
     background-color: var(--background-color);
 }
 
-body * {
-    font-family: 'Helvetica', 'Arial', sans-serif;
-    font-size: var(--font-size);
-}
-
-input:focus {
-    outline-offset: 0px;
-    outline-width: 2px;
-    outline-style: solid;
-}
-
-.btn {
-    background-color: var(--primary-color);
-    border: 0px;
-    width: 100px;
-    border-radius: var(--border-radius);
-    padding: 10px 20px 10px 20px;
-    color: white;
-}
-
-.btn:hover {
-    opacity: 70%;
-}
 html, body { height: 100%; }
+
+*/
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

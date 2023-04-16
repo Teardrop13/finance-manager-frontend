@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterRequest } from '@core/authentication/models/authentication.model';
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
 
 @Component({
@@ -10,36 +10,27 @@ import { AuthenticationService } from '@core/authentication/services/authenticat
 })
 export class RegistrationComponent implements OnInit {
 
-  registerRequest: RegisterRequest = {
-    username: "",
-    password: "",
-    email: ""
-  };
-
-  @ViewChild("usernameError")
-  usernameError: ElementRef;
-
-  @ViewChild("emailError")
-  emailError: ElementRef;
-
-  @ViewChild("passwordError")
-  passwordError: ElementRef;
+  registerForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    password2: new FormControl('', [Validators.required]),
+  }, { validators: this.customValidatorForm });
 
   constructor(private authentication: AuthenticationService,
-    private router: Router,
-    private renderer: Renderer2) {}
+    private router: Router) {}
 
   ngOnInit(): void {
   }
 
   register() {
-    if (this.validateRequest()) {
-      this.authentication.register(this.registerRequest)
+    if (this.registerForm.valid) {
+      this.authentication.register(this.registerForm.value)
         .subscribe(
           {
             next: res => {
               if (res.error) {
-                this.renderer.setProperty(this.usernameError.nativeElement, "innerHTML", res.error);
+                alert('Failed to register');
               } else {
                 this.router.navigateByUrl('/login');
               }
@@ -50,31 +41,13 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  private validateRequest(): boolean {
-    let valid = true;
-    const fieldRequired = "Field required.";
-
-    this.resetErrors()
-
-    if (!this.registerRequest.username) {
-      this.renderer.setProperty(this.usernameError.nativeElement, "innerHTML", fieldRequired);
-      valid = false;
-    }
-    if (!this.registerRequest.email) {
-      this.renderer.setProperty(this.emailError.nativeElement, "innerHTML", fieldRequired);
-      valid = false;
-    }
-    if (!this.registerRequest.password) {
-      this.renderer.setProperty(this.passwordError.nativeElement, "innerHTML", fieldRequired);
-      valid = false;
-    }
-    return valid;
-  }
-
-  private resetErrors() {
-    this.renderer.setProperty(this.usernameError.nativeElement, "innerHTML", "");
-    this.renderer.setProperty(this.emailError.nativeElement, "innerHTML", "");
-    this.renderer.setProperty(this.passwordError.nativeElement, "innerHTML", "");
+  customValidatorForm() {
+    return (form: FormGroup) => {
+      return form.get('password')?.value !== form.get('password2')?.value
+        ? { notmatched: true }
+        : null;
+    };
   }
 
 }
+
