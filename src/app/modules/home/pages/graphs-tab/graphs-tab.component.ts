@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './graphs-tab.component.html',
   styleUrls: ['./graphs-tab.component.scss']
 })
-export class GraphsTabComponent implements OnInit {
+export class AnalysisTabComponent implements OnInit {
 
   constructor() { }
 

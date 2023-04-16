@@ -29,6 +29,11 @@ export class AuthenticationService {
     );
   }
 
+  logout() {
+    this.removeToken();
+    this.router.navigateByUrl('/login');
+  }
+
   register(registerRequest: RegisterRequest): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>('/api/auth/register', registerRequest);
   }
