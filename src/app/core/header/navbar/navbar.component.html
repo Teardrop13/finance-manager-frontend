@@ -1,5 +1,6 @@
 <mat-toolbar color="primary">
   <div *ngIf="!displayMenuButton">
+    <a [routerLink]="'/home/summary'" mat-button>Summary</a>
     <a [routerLink]="'/home/categories'" mat-button>Categories</a>
     <a [routerLink]="'/home/analysis'" mat-button>Analysis</a>
     <a [routerLink]="'/home/history'" mat-button>History</a>
