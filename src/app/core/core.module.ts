@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { MaterialModule } from '../material/material.module';
 import { EnsureModuleLoadedOnceGuard } from './EnsureModuleLoadedOnceGuard';
 import { LoginComponent } from './authentication/components/login/login.component';
 import { RegistrationComponent } from './authentication/components/registration/registration.component';
+import { AuthenticationInterceptorService } from './authentication/services/authentication-interceptor.service';
 import { NavbarComponent } from './header/navbar/navbar.component';
-import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -23,6 +24,13 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     NavbarComponent
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptorService,
+      multi: true
+    }
   ]
 })
 export class CoreModule extends EnsureModuleLoadedOnceGuard {
