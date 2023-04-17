@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountingPeriod } from '@shared/models/period.model';
 
 @Component({
   selector: 'app-summary-tab',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryTabComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }
+
+
+
+  changePeriod(period: AccountingPeriod) {
+
+  }
+
+
 
 }

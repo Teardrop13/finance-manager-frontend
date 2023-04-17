@@ -1,0 +1,9 @@
+<div *ngIf="currentPeriod" class="selector">
+  <button mat-icon-button color="primary" (click)="getPrevious()">
+    <mat-icon>arrow_backward</mat-icon>
+  </button>
+  <div>{{ currentPeriod.startsOn }} - {{ currentPeriod.endsOn }}</div>
+  <button mat-icon-button color="primary" (click)="getNext()">
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+</div>
