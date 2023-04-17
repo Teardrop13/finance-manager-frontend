@@ -10,8 +10,8 @@ import { AuthenticationService } from '@core/authentication/services/authenticat
 export class LoginComponent implements OnInit {
 
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
 
   constructor(private authentication: AuthenticationService) {}

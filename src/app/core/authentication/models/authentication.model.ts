@@ -1,6 +1,6 @@
 export interface LoginRequest {
-  email?: string|null,
-  password?: string|null
+  email?: string | null,
+  password?: string | null
 }
 
 export interface LoginResponse {
@@ -8,10 +8,9 @@ export interface LoginResponse {
 }
 
 export interface RegisterRequest {
-  email?: string|null;
-  username?: string|null;
-  password?: string|null;
-  password2?: string|null;
+  email?: string | null;
+  username?: string | null;
+  password?: string | null;
 }
 
 export interface RegisterResponse {

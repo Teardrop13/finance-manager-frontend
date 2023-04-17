@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
 
@@ -10,17 +10,17 @@ import { AuthenticationService } from '@core/authentication/services/authenticat
 })
 export class RegistrationComponent implements OnInit {
 
-  registerForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    password2: new FormControl('', [Validators.required]),
-  }, { validators: this.customValidatorForm });
+  registerForm: FormGroup;
 
   constructor(private authentication: AuthenticationService,
     private router: Router) {}
 
   ngOnInit(): void {
+    this.registerForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    });
   }
 
   register() {
@@ -41,13 +41,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  customValidatorForm() {
-    return (form: FormGroup) => {
-      return form.get('password')?.value !== form.get('password2')?.value
-        ? { notmatched: true }
-        : null;
-    };
+  isNotMatched() {
+    return this.registerForm.get('password2')?.hasError('notmatched');
   }
-
 }
-

@@ -6,10 +6,6 @@
   <mat-form-field class="form-input">
     <mat-label>Email</mat-label>
     <input type="email" matInput formControlName="email">
-    <mat-error
-               *ngIf="loginForm.get('email')?.hasError('email') && !loginForm.get('email')?.hasError('required')">
-      Please enter a valid email address
-    </mat-error>
     <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
       Email is required
     </mat-error>
@@ -20,10 +16,6 @@
     <input type="password" matInput formControlName="password">
     <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
       Password is required
-    </mat-error>
-    <mat-error
-               *ngIf="loginForm.get('password')?.hasError('minlength') && !loginForm.get('password')?.hasError('required')">
-      Password is too short
     </mat-error>
   </mat-form-field>
 
