@@ -1,0 +1,36 @@
+<form [formGroup]="recordAddForm"
+      role="form"
+      (submit)="addRecord()">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Amount</mat-label>
+    <input type="number" matInput formControlName="amount">
+    <mat-error *ngIf="recordAddForm.get('amount')?.hasError('required')">
+      Amount is required
+    </mat-error>
+    <mat-error *ngIf="!recordAddForm.get('amount')?.hasError('required') && recordAddForm.get('amount')?.hasError('min')">
+      Amount should be greater than 0
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category">
+      <mat-option *ngFor="let category of categories" value="{{ category.name }}">{{ category.name }}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="recordAddForm.get('category')?.hasError('required')">
+      Category is required
+    </mat-error>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <input type="text" matInput>
+  </mat-form-field>
+
+  <button mat-icon-button color="accent" type="submit">
+    <mat-icon>add</mat-icon>
+  </button>
+
+</form>
