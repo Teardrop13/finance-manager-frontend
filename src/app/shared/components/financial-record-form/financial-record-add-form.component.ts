@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { CategoryService } from '@core/services/category.service';
 import { FinancialRecordService } from '@core/services/financial-record.service';
 import { Category } from '@shared/models/category.model';
@@ -11,17 +11,20 @@ import { Subscription } from 'rxjs';
   templateUrl: './financial-record-add-form.component.html',
   styleUrls: ['./financial-record-add-form.component.scss']
 })
-export class FinancialRecordAddFormComponent implements OnInit, OnDestroy {
+export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input()
   type: FinancialRecordType;
 
-  categories: Category[] = [];
-
   @Output()
   onSubmit = new EventEmitter<FinancialRecord>();
+  
+  categories: Category[] = [];
 
   recordAddForm: FormGroup;
+
+  @ViewChild(FormGroupDirective)
+  formGroupDirective: FormGroupDirective;
 
   private subscriptions: Subscription[] = [];
 
@@ -29,17 +32,28 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService) {}
 
   ngOnInit() {
-    this.subscriptions.push(this.categoryService.getCategories(this.type)
-      .subscribe({
-        next: categories => {
-          this.categories.push(...categories);
-          this.recordAddForm = this.getForm();
-        }
-      }));
+    this.loadCategories();
+    this.recordAddForm = this.getForm();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loadCategories();
+    if (this.recordAddForm) {
+      this.resetForm();
+    }
+  }
+
+  loadCategories() {
+    this.subscriptions.push(this.categoryService.getCategories(this.type)
+      .subscribe({
+        next: categories => {
+          this.categories = categories;
+        }
+      }));
   }
 
   addRecord() {
@@ -51,9 +65,15 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy {
         .subscribe({
           next: r => {
             this.onSubmit.emit(r);
+            this.resetForm();
           }
         }));
     }
+  }
+
+  resetForm() {
+    this.formGroupDirective.resetForm();
+    this.recordAddForm = this.getForm()
   }
 
   getForm(): FormGroup {

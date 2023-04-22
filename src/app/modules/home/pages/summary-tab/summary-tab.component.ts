@@ -11,8 +11,7 @@ import { AccountingPeriod } from '@shared/models/period.model';
 })
 export class SummaryTabComponent {
 
-  newRecordType: FinancialRecordType | undefined;
-  chartType: FinancialRecordType = FinancialRecordType.EXPENSE;
+  recordType: FinancialRecordType = FinancialRecordType.EXPENSE;
   selectedPeriod: AccountingPeriod;
 
   summaries: Summary[] = [];
@@ -21,26 +20,16 @@ export class SummaryTabComponent {
 
   changePeriod(period: AccountingPeriod) {
     this.selectedPeriod = period;
-    this.closeRecordAddForm();
-    this.loadSummaries();
+    this.loadSummary();
   }
 
-  openRecordAddForm(type: FinancialRecordType) {
-    this.newRecordType = type;
+  changeRecordType(type: FinancialRecordType) {
+    this.recordType = type;
+    this.loadSummary();
   }
 
-  closeRecordAddForm() {
-    this.newRecordType = undefined;
-    this.loadSummaries();
-  }
-
-  changeChartType(chartType: FinancialRecordType) {
-    this.chartType = chartType;
-    this.loadSummaries();
-  }
-
-  loadSummaries() {
-    this.analysisService.getSummary(this.chartType, this.selectedPeriod).subscribe({
+  loadSummary() {
+    this.analysisService.getSummary(this.recordType, this.selectedPeriod).subscribe({
       next: summaries => this.summaries = summaries
     });
   }

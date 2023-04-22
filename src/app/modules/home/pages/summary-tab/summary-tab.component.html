@@ -1,13 +1,7 @@
 <app-period-selector (onPeriodSelected)="changePeriod($event)"></app-period-selector>
 
-<app-chart-type-select (onChartTypeChanged)="changeChartType($event)"></app-chart-type-select>
+<app-record-type-select (onChartTypeChanged)="changeRecordType($event)"></app-record-type-select>
 
 <app-summary-chart [summaries]="summaries"></app-summary-chart>
 
-<div *ngIf="newRecordType == undefined">
-  <app-financial-record-type-select (onTypeSelect)="openRecordAddForm($event)"></app-financial-record-type-select>
-</div>
-
-<div *ngIf="newRecordType != undefined">
-  <app-financial-record-add-form [type]="newRecordType" (onSubmit)="closeRecordAddForm()"></app-financial-record-add-form>
-</div>
+<app-financial-record-add-form [type]="recordType" (onSubmit)="loadSummary()"></app-financial-record-add-form>

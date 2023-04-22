@@ -5,7 +5,7 @@ import { MaterialModule } from '../material/material.module';
 import { FinancialRecordTypeSelectComponent } from './components/financial-record-type-select/financial-record-type-select.component';
 import { FinancialRecordAddFormComponent } from './components/financial-record-form/financial-record-add-form.component';
 import { SummaryChartComponent } from './components/summary-chart/summary-chart.component';
-import { ChartTypeSelectComponent } from './components/chart-type-select/chart-type-select.component';
+import { RecordTypeSelectComponent } from './components/chart-type-select/chart-type-select.component';
 
 
 
@@ -15,7 +15,7 @@ import { ChartTypeSelectComponent } from './components/chart-type-select/chart-t
     FinancialRecordTypeSelectComponent,
     FinancialRecordAddFormComponent,
     SummaryChartComponent,
-    ChartTypeSelectComponent
+    RecordTypeSelectComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +26,7 @@ import { ChartTypeSelectComponent } from './components/chart-type-select/chart-t
     FinancialRecordTypeSelectComponent,
     FinancialRecordAddFormComponent,
     SummaryChartComponent,
-    ChartTypeSelectComponent
+    RecordTypeSelectComponent
   ]
 })
 export class SharedModule {}
