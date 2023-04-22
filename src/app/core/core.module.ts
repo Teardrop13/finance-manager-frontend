@@ -7,7 +7,7 @@ import { MaterialModule } from '../material/material.module';
 import { EnsureModuleLoadedOnceGuard } from './EnsureModuleLoadedOnceGuard';
 import { LoginComponent } from './authentication/components/login/login.component';
 import { RegistrationComponent } from './authentication/components/registration/registration.component';
-import { AuthenticationInterceptorService } from './authentication/services/authentication-interceptor.service';
+import { AuthenticationInterceptorService } from './interceptors/authentication-interceptor.service';
 import { NavbarComponent } from './header/navbar/navbar.component';
 @NgModule({
   declarations: [

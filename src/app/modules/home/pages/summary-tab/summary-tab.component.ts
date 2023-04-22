@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatRadioChange } from '@angular/material/radio';
 import { FinancialRecordType } from '@shared/models/financial-record.model';
 import { AccountingPeriod } from '@shared/models/period.model';
 
@@ -9,18 +10,25 @@ import { AccountingPeriod } from '@shared/models/period.model';
 })
 export class SummaryTabComponent {
 
-  type: FinancialRecordType | undefined;
+  newRecordType: FinancialRecordType | undefined;
+  chartType: FinancialRecordType = FinancialRecordType.EXPENSE;
+  selectedPeriod: AccountingPeriod;
 
   changePeriod(period: AccountingPeriod) {
+    this.selectedPeriod = period;
     this.closeRecordAddForm();
   }
 
   openRecordAddForm(type: FinancialRecordType) {
-    this.type = type;
+    this.newRecordType = type;
   }
 
   closeRecordAddForm() {
-    this.type = undefined;
+    this.newRecordType = undefined;
+  }
+
+  changeChartType(chartType: FinancialRecordType) {
+    this.chartType = chartType;
   }
 
 }

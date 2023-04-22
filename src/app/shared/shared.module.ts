@@ -4,6 +4,8 @@ import { PeriodSelectorComponent } from './components/period-selector/period-sel
 import { MaterialModule } from '../material/material.module';
 import { FinancialRecordTypeSelectComponent } from './components/financial-record-type-select/financial-record-type-select.component';
 import { FinancialRecordAddFormComponent } from './components/financial-record-form/financial-record-add-form.component';
+import { SummaryChartComponent } from './components/summary-chart/summary-chart.component';
+import { ChartTypeSelectComponent } from './components/chart-type-select/chart-type-select.component';
 
 
 
@@ -11,7 +13,9 @@ import { FinancialRecordAddFormComponent } from './components/financial-record-f
   declarations: [
     PeriodSelectorComponent,
     FinancialRecordTypeSelectComponent,
-    FinancialRecordAddFormComponent
+    FinancialRecordAddFormComponent,
+    SummaryChartComponent,
+    ChartTypeSelectComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +24,9 @@ import { FinancialRecordAddFormComponent } from './components/financial-record-f
   exports: [
     PeriodSelectorComponent,
     FinancialRecordTypeSelectComponent,
-    FinancialRecordAddFormComponent
+    FinancialRecordAddFormComponent,
+    SummaryChartComponent,
+    ChartTypeSelectComponent
   ]
 })
 export class SharedModule {}

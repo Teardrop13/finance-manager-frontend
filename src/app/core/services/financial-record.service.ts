@@ -17,7 +17,7 @@ export class FinancialRecordService {
   getAll(page: number, pageSize: number): Observable<FinancialRecord[]> {
     const params = new HttpParams()
       .append("page", page)
-      .append("page-size", pageSize);
+      .append("pageSize", pageSize);
 
     return this.http.get<FinancialRecord[]>('/api/record/all', { params: params });
   }

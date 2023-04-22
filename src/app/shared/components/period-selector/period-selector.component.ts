@@ -29,6 +29,7 @@ export class PeriodSelectorComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.periodService.getCurrent().subscribe({
       next: period => {
         this.currentPeriod = period;
+        this.onPeriodSelected.emit(period);
       }
     }));
   }
