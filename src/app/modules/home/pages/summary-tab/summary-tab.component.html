@@ -2,7 +2,7 @@
 
 <app-chart-type-select (onChartTypeChanged)="changeChartType($event)"></app-chart-type-select>
 
-<app-summary-chart *ngIf="selectedPeriod && chartType" [type]="chartType" [period]="selectedPeriod"></app-summary-chart>
+<app-summary-chart [summaries]="summaries"></app-summary-chart>
 
 <div *ngIf="newRecordType == undefined">
   <app-financial-record-type-select (onTypeSelect)="openRecordAddForm($event)"></app-financial-record-type-select>

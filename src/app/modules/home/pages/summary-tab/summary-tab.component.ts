@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { MatRadioChange } from '@angular/material/radio';
+import { AnalysisService } from '@core/services/analysis.service';
+import { Summary } from '@shared/models/analysis.model';
 import { FinancialRecordType } from '@shared/models/financial-record.model';
 import { AccountingPeriod } from '@shared/models/period.model';
 
@@ -14,9 +15,14 @@ export class SummaryTabComponent {
   chartType: FinancialRecordType = FinancialRecordType.EXPENSE;
   selectedPeriod: AccountingPeriod;
 
+  summaries: Summary[] = [];
+
+  constructor(private analysisService: AnalysisService) {}
+
   changePeriod(period: AccountingPeriod) {
     this.selectedPeriod = period;
     this.closeRecordAddForm();
+    this.loadSummaries();
   }
 
   openRecordAddForm(type: FinancialRecordType) {
@@ -25,10 +31,18 @@ export class SummaryTabComponent {
 
   closeRecordAddForm() {
     this.newRecordType = undefined;
+    this.loadSummaries();
   }
 
   changeChartType(chartType: FinancialRecordType) {
     this.chartType = chartType;
+    this.loadSummaries();
+  }
+
+  loadSummaries() {
+    this.analysisService.getSummary(this.chartType, this.selectedPeriod).subscribe({
+      next: summaries => this.summaries = summaries
+    });
   }
 
 }

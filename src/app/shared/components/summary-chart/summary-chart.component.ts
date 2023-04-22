@@ -1,36 +1,21 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { AnalysisService } from '@core/services/analysis.service';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Summary } from '@shared/models/analysis.model';
-import { FinancialRecordType } from '@shared/models/financial-record.model';
-import { AccountingPeriod } from '@shared/models/period.model';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
-import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-summary-chart',
   templateUrl: './summary-chart.component.html',
   styleUrls: ['./summary-chart.component.scss']
 })
-export class SummaryChartComponent implements OnInit, OnDestroy, OnChanges {
+export class SummaryChartComponent implements OnInit, OnChanges {
 
   @Input()
-  type: FinancialRecordType;
-
-  @Input()
-  period: AccountingPeriod;
+  summaries: Summary[];
 
   chart: Chart;
-
-  private subscriptions: Subscription[] = [];
-
-  constructor(private analysisService: AnalysisService) {}
 
   ngOnInit(): void {
     Chart.register(...registerables);
     this.loadChart()
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe())
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -41,10 +26,7 @@ export class SummaryChartComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   loadChart(): void {
-    this.subscriptions.push(this.analysisService.getSummary(this.type, this.period).subscribe({
-      next: summaries => this.chart = new Chart("chart", this.getConfig(summaries))
-    }))
-
+    this.chart = new Chart("chart", this.getConfig(this.summaries));
   }
 
   getConfig(summaries: Summary[]): ChartConfiguration {
