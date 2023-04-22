@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Category } from '@shared/models/category.model';
+import { Component } from '@angular/core';
+import { FinancialRecordType } from '@shared/models/financial-record.model';
 import { AccountingPeriod } from '@shared/models/period.model';
 
 @Component({
@@ -9,25 +9,18 @@ import { AccountingPeriod } from '@shared/models/period.model';
 })
 export class SummaryTabComponent {
 
+  type: FinancialRecordType | undefined;
 
-  @ViewChild("typeSelect")
-  typeSelect: ElementRef;
-
-  @ViewChild("recordAddForm")
-  recordAddForm: ElementRef;
-
-  categories: Category[] = [];
-  
   changePeriod(period: AccountingPeriod) {
-    this.categories.splice(0);
+    this.closeRecordAddForm();
   }
 
-  openRecordAddForm(categories: Category[]) {
-    this.categories.push(...categories);
+  openRecordAddForm(type: FinancialRecordType) {
+    this.type = type;
   }
 
   closeRecordAddForm() {
-    this.categories.splice(0);
+    this.type = undefined;
   }
 
 }

@@ -1,4 +1,5 @@
-<form [formGroup]="recordAddForm"
+<form *ngIf="categories.length > 0"
+      [formGroup]="recordAddForm"
       role="form"
       (submit)="addRecord()">
 
@@ -14,6 +15,17 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill">
+    <mat-label>Date</mat-label>
+    <input matInput formControlName="transactionDate" [matDatepicker]="picker">
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="recordAddForm.get('transactionDate')?.hasError('required')">
+      Transaction date is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
     <mat-label>Category</mat-label>
     <mat-select formControlName="category">
       <mat-option *ngFor="let category of categories" value="{{ category.name }}">{{ category.name }}</mat-option>
@@ -23,10 +35,9 @@
     </mat-error>
   </mat-form-field>
 
-
   <mat-form-field appearance="fill">
     <mat-label>Description</mat-label>
-    <input type="text" matInput>
+    <input type="text" matInput formControlName="description">
   </mat-form-field>
 
   <button mat-icon-button color="accent" type="submit">

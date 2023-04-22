@@ -1,9 +1,9 @@
 <app-period-selector (onPeriodSelected)="changePeriod($event)"></app-period-selector>
 
-<div *ngIf="categories.length == 0">
+<div *ngIf="type == undefined">
   <app-financial-record-type-select (onTypeSelect)="openRecordAddForm($event)"></app-financial-record-type-select>
 </div>
 
-<div *ngIf="categories.length != 0">
-  <app-financial-record-add-form [categories]="categories" (onSubmit)="closeRecordAddForm()"></app-financial-record-add-form>
+<div *ngIf="type != undefined">
+  <app-financial-record-add-form [type]="type" (onSubmit)="closeRecordAddForm()"></app-financial-record-add-form>
 </div>

@@ -1,36 +1,22 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
-import { CategoryService } from '@core/services/category.service';
-import { Category } from '@shared/models/category.model';
-import { Subscription } from 'rxjs';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FinancialRecordType } from '@shared/models/financial-record.model';
 
 @Component({
   selector: 'app-financial-record-type-select',
   templateUrl: './financial-record-type-select.component.html',
   styleUrls: ['./financial-record-type-select.component.scss']
 })
-export class FinancialRecordTypeSelectComponent implements OnDestroy {
+export class FinancialRecordTypeSelectComponent {
 
   @Output()
-  onTypeSelect = new EventEmitter<Category[]>();
-
-  private subscriptions: Subscription[] = [];
-
-  constructor(private categoryService: CategoryService) {}
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe());
-  }
+  onTypeSelect = new EventEmitter<FinancialRecordType>();
 
   addIncome() {
-    this.subscriptions.push(this.categoryService.getIncomeCategories().subscribe({
-      next: categories => this.onTypeSelect.emit(categories)
-    }));
+    this.onTypeSelect.emit(FinancialRecordType.INCOME);
   }
 
   addExpense() {
-    this.subscriptions.push(this.categoryService.getExpenseCategories().subscribe({
-      next: categories => this.onTypeSelect.emit(categories)
-    }));
+    this.onTypeSelect.emit(FinancialRecordType.EXPENSE);
   }
 
 }
