@@ -6,6 +6,7 @@ import { AnalysisTabComponent } from './pages/analysis-tab/analysis-tab.componen
 import { HistoryTabComponent } from './pages/history-tab/history-tab.component';
 import { SummaryTabComponent } from './pages/summary-tab/summary-tab.component';
 import { SharedModule } from '@shared/shared.module';
+import { MaterialModule } from 'src/app/material/material.module';
 
 
 
@@ -19,7 +20,8 @@ import { SharedModule } from '@shared/shared.module';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
+    MaterialModule
   ]
 })
 export class HomeModule {}
