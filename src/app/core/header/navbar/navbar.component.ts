@@ -1,5 +1,4 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
 
 @Component({
@@ -7,29 +6,14 @@ import { AuthenticationService } from '@core/authentication/services/authenticat
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  displayMenuButton: boolean = true;
+  showMenu = false;
 
-  constructor(private responsive: BreakpointObserver,
-    private authentication: AuthenticationService) {}
-
-
-  ngOnInit() {
-    this.responsive.observe(Breakpoints.Small)
-      .subscribe(result => {
-
-        if (result.matches) {
-          this.displayMenuButton = true;
-        } else {
-          this.displayMenuButton = false;
-        }
-
-      });
-  }
+  constructor(private authentication: AuthenticationService) {}
 
   toggleMenu() {
-
+    this.showMenu = !this.showMenu;
   }
 
   logout() {

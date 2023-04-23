@@ -1,14 +1,21 @@
 <mat-toolbar color="primary">
-  <div *ngIf="!displayMenuButton">
+  <div class="menu">
     <a [routerLink]="'/home/summary'" mat-button>Summary</a>
     <a [routerLink]="'/home/categories'" mat-button>Categories</a>
     <a [routerLink]="'/home/analysis'" mat-button>Analysis</a>
     <a [routerLink]="'/home/history'" mat-button>History</a>
     <a (click)="logout()" mat-button>Log out</a>
   </div>
-  <div *ngIf="displayMenuButton">
-    <button mat-icon-button>
-      <mat-icon (click)="toggleMenu()">menu</mat-icon>
+  <div class="menu-toggle">
+    <button mat-icon-button (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
     </button>
   </div>
 </mat-toolbar>
+<div *ngIf="showMenu" class="menu-dropdown">
+  <a [routerLink]="'/home/summary'" mat-button>Summary</a>
+  <a [routerLink]="'/home/categories'" mat-button>Categories</a>
+  <a [routerLink]="'/home/analysis'" mat-button>Analysis</a>
+  <a [routerLink]="'/home/history'" mat-button>History</a>
+  <a (click)="logout()" mat-button>Log out</a>
+</div>

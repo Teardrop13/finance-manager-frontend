@@ -19,3 +19,11 @@
     text-decoration: none;
     background-color: transparent;
 }
+
+@media screen and (max-width: 500px) {
+    .form {
+        align-items: stretch;
+        width: 90%;
+        padding: 0;
+    }
+}

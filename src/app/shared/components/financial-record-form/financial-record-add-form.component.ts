@@ -18,7 +18,7 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
 
   @Output()
   onSubmit = new EventEmitter<FinancialRecord>();
-  
+
   categories: Category[] = [];
 
   recordAddForm: FormGroup;
