@@ -4,7 +4,7 @@ import { PeriodSelectorComponent } from './components/period-selector/period-sel
 import { MaterialModule } from '../material/material.module';
 import { FinancialRecordAddFormComponent } from './components/financial-record-form/financial-record-add-form.component';
 import { SummaryChartComponent } from './components/summary-chart/summary-chart.component';
-import { RecordTypeSelectComponent } from './components/chart-type-select/record-type-select.component';
+import { RecordTypeSelectComponent } from './components/record-type-select/record-type-select.component';
 
 
 

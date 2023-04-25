@@ -5,6 +5,18 @@
     margin-top: 20px;
 }
 
+.table {
+    overflow-x: auto;
+}
+
 .paginator {
     margin-top: 20px;
+}
+
+@media screen and (max-width: 800px) {
+    .table-container {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+    }
 }

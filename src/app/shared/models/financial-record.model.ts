@@ -1,8 +1,9 @@
 export interface FinancialRecord {
-  amount?: number|null,
-  category?: string|null,
-  description?: string|null,
-  type?: string|null,
+  amount?: number | null,
+  transactionDate?: Date | null,
+  category?: string | null,
+  description?: string | null,
+  type?: string | null,
 }
 
 export enum FinancialRecordType {
