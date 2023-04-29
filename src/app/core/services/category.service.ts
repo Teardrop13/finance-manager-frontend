@@ -13,9 +13,9 @@ export class CategoryService {
 
   getCategories(type: FinancialRecordType): Observable<Category[]> {
     if (type === FinancialRecordType.INCOME) {
-      return this.http.get<Category[]>("/api/category/income");
+      return this.http.get<Category[]>("/api/categories/income");
     } else if (type === FinancialRecordType.EXPENSE) {
-      return this.http.get<Category[]>("/api/category/expense");
+      return this.http.get<Category[]>("/api/categories/expense");
     } else {
       console.log(`wrong type: ${type}`)
       return of([]);

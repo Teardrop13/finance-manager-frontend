@@ -11,21 +11,21 @@ export class AccountingPeriodService {
   constructor(private http: HttpClient) {}
 
   getCurrent(): Observable<AccountingPeriod> {
-    return this.http.get<AccountingPeriod>('/api/accounting-period/current');
+    return this.http.get<AccountingPeriod>('/api/accounting-periods/current');
   }
 
   getNext(period: AccountingPeriod): Observable<AccountingPeriod> {
     const params = new HttpParams()
       .append("currentId", period.id);
 
-    return this.http.get<AccountingPeriod>('/api/accounting-period/next', { params: params });
+    return this.http.get<AccountingPeriod>('/api/accounting-periods/next', { params: params });
   }
 
   getPrevious(period: AccountingPeriod): Observable<AccountingPeriod> {
     const params = new HttpParams()
       .append("currentId", period.id);
 
-    return this.http.get<AccountingPeriod>('/api/accounting-period/previous', { params: params });
+    return this.http.get<AccountingPeriod>('/api/accounting-periods/previous', { params: params });
   }
 
 }

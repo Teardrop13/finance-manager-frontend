@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class HistoryTabComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatTable) table: MatTable<FinancialRecord>;
-  displayedColumns: string[] = ['amount', 'category', 'transactionDate', 'description'];
+  displayedColumns: string[] = ['amount', 'category', 'transactionDate', 'description', 'removeAction'];
 
   page = 0;
   pageSize = 10;
@@ -49,10 +49,22 @@ export class HistoryTabComponent implements OnInit, OnDestroy {
   }
 
   handlePageEvent(e: PageEvent) {
-    console.log(e)
     this.pageSize = e.pageSize;
     this.page = e.pageIndex;
     this.loadRecords();
+  }
+
+  remove(record: FinancialRecord) {
+    if (!record.id) {
+      console.error('Record does not have id');
+      return
+    }
+
+    this.subscriptions.push(this.financialRecordService.remove(record.id).subscribe({
+      next: res => {
+        this.loadRecords()
+      }
+    }));
   }
 
 }

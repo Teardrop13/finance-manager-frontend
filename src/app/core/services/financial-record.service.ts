@@ -10,8 +10,8 @@ export class FinancialRecordService {
 
   constructor(private http: HttpClient) {}
 
-  add(record: FinancialRecord): Observable<FinancialRecord> {
-    return this.http.post<FinancialRecord>('/api/record/add', record);
+  add(financialRecord: FinancialRecord): Observable<FinancialRecord> {
+    return this.http.post<FinancialRecord>('/api/records', financialRecord);
   }
 
   getAll(page: number, pageSize: number): Observable<FinancialRecord[]> {
@@ -19,10 +19,14 @@ export class FinancialRecordService {
       .append("page", page)
       .append("pageSize", pageSize);
 
-    return this.http.get<FinancialRecord[]>('/api/record/all', { params: params });
+    return this.http.get<FinancialRecord[]>('/api/records', { params: params });
   }
 
   getCount() {
-    return this.http.get<number>('/api/record/count-all');
+    return this.http.get<number>('/api/records/count');
+  }
+
+  remove(id: number) {
+    return this.http.delete(`/api/records/${id}`);
   }
 }
