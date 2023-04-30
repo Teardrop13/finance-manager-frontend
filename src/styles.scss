@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
@@ -10,54 +9,52 @@
 @include mat.core();
 
 $primary-palette: (
- 50: #e1ecfd,
- 100: #b3d0fa,
- 200: #81b1f7,
- 300: #4e91f3,
- 400: #287af1,
- 500: #0262ee,
- 600: #025aec,
- 700: #0150e9,
- 800: #0146e7,
- 900: #0134e2,
- contrast: (
-   50: rgba(black, 0.87),
-   100: rgba(black, 0.87),
-   200: rgba(black, 0.87),
-   300: rgba(black, 0.87),
-   400: rgba(black, 0.87),
-   500: white,
-   600: white,
-   700: white,
-   800: white,
-   900: white,
- )
+    50: #e1ecfd,
+    100: #b3d0fa,
+    200: #81b1f7,
+    300: #4e91f3,
+    400: #287af1,
+    500: #0262ee,
+    600: #025aec,
+    700: #0150e9,
+    800: #0146e7,
+    900: #0134e2,
+    contrast: (50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: rgba(black, 0.87),
+        400: rgba(black, 0.87),
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+    )
 );
 
 
 $accent-palette: (
- 50: #feeee0,
- 100: #fcd4b3,
- 200: #fab880,
- 300: #f79c4d,
- 400: #f68626,
- 500: #f47100,
- 600: #f36900,
- 700: #f15e00,
- 800: #ef5400,
- 900: #ec4200,
- contrast: (
-   50: rgba(black, 0.87),
-   100: rgba(black, 0.87),
-   200: rgba(black, 0.87),
-   300: rgba(black, 0.87),
-   400: rgba(black, 0.87),
-   500: white,
-   600: white,
-   700: white,
-   800: white,
-   900: white,
- )
+    50: #feeee0,
+    100: #fcd4b3,
+    200: #fab880,
+    300: #f79c4d,
+    400: #f68626,
+    500: #f47100,
+    600: #f36900,
+    700: #f15e00,
+    800: #ef5400,
+    900: #ec4200,
+    contrast: (50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: rgba(black, 0.87),
+        400: rgba(black, 0.87),
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+    )
 );
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
@@ -71,13 +68,10 @@ $finance-manager-frontend-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$finance-manager-frontend-theme: mat.define-light-theme((
-  color: (
-    primary: $finance-manager-frontend-primary,
-    accent: $finance-manager-frontend-accent,
-    warn: $finance-manager-frontend-warn,
-  )
-));
+$finance-manager-frontend-theme: mat.define-light-theme((color: (primary: $finance-manager-frontend-primary,
+                accent: $finance-manager-frontend-accent,
+                warn: $finance-manager-frontend-warn,
+            )));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -91,4 +85,7 @@ $finance-manager-frontend-theme: mat.define-light-theme((
 html, body { height: 100%; }
 
 */
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
