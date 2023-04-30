@@ -41,14 +41,18 @@ export class CategoryEditorTabComponent implements OnInit, OnDestroy {
   private reorderCategories() {
     this.categories.forEach((category, index) => category.priority = index + 1);
     this.subscribtions.push(this.categoryService.saveMultiple(this.categories).subscribe({
-      next: res => this.snackBar.open('Categories saved')
+      next: res => this.snackBar.open('Categories saved', 'OK', {
+        duration: 3000
+      })
     }));
   }
 
   delete(category: Category) {
     this.subscribtions.push(this.categoryService.delete(category.id).subscribe({
       next: res => {
-        this.snackBar.open(`"${category.name}" category deleted!`);
+        this.snackBar.open(`"${category.name}" category deleted!`, 'OK', {
+          duration: 3000
+        });
         this.loadCategories();
       }
     }))
