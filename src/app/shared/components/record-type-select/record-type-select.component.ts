@@ -10,9 +10,9 @@ import { FinancialRecordType } from '@shared/models/financial-record.model';
 export class RecordTypeSelectComponent {
 
   @Output()
-  onChartTypeChanged: EventEmitter<FinancialRecordType> = new EventEmitter();
+  onTypeChanged: EventEmitter<FinancialRecordType> = new EventEmitter();
 
   changeChartType(change: MatRadioChange) {
-    this.onChartTypeChanged.emit(FinancialRecordType[change.value.toUpperCase()]);
+    this.onTypeChanged.emit(FinancialRecordType[change.value.toUpperCase()]);
   }
 }

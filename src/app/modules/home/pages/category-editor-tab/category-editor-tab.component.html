@@ -1,1 +1,14 @@
-<p>category-editor-tab works!</p>
+<div class="tab-content">
+  <app-record-type-select (onTypeChanged)="setType($event)"></app-record-type-select>
+
+  <app-category-form [categoryType]="type" (onCategoryAdded)="loadCategories()"></app-category-form>
+
+  <div cdkDropList class="categories-list" (cdkDropListDropped)="drop($event)">
+    <div class="box" *ngFor="let category of categories" cdkDrag>
+      {{category.name}}
+      <button mat-icon-button color="accent" (click)="delete(category)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

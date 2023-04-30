@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class HistoryTabComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatTable) table: MatTable<FinancialRecord>;
-  displayedColumns: string[] = ['amount', 'category', 'transactionDate', 'description', 'removeAction'];
+  displayedColumns: string[] = ['amount', 'category', 'transactionDate', 'description', 'action'];
 
   page = 0;
   pageSize = 10;

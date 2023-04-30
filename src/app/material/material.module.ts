@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -11,10 +12,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
 @NgModule({
   declarations: [],
   imports: [
@@ -33,6 +34,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSortModule,
     MatPaginatorModule,
     MatRadioModule,
+    DragDropModule,
   ],
   exports: [
     CommonModule,
@@ -49,6 +51,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSortModule,
     MatPaginatorModule,
     MatRadioModule,
+    DragDropModule,
+  ],
+  providers: [
+    MatSnackBar
   ]
 })
 export class MaterialModule {}

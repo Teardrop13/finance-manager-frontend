@@ -1,0 +1,16 @@
+<form class="form"
+      [formGroup]="categoryAddForm"
+      role="form"
+      (submit)="addCategory()">
+
+  <mat-form-field class="input">
+    <mat-label>Category name</mat-label>
+    <input type="text" matInput formControlName="name">
+    <mat-error *ngIf="categoryAddForm.get('name')?.hasError('required')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-icon-button color="accent" type="submit"><mat-icon>add</mat-icon></button>
+
+</form>

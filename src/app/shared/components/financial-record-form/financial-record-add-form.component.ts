@@ -48,7 +48,7 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
   }
 
   loadCategories() {
-    this.subscriptions.push(this.categoryService.getCategories(this.type)
+    this.subscriptions.push(this.categoryService.getByType(this.type)
       .subscribe({
         next: categories => {
           this.categories = categories;
@@ -73,7 +73,7 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
 
   resetForm() {
     this.formGroupDirective.resetForm();
-    this.recordAddForm = this.getForm()
+    this.recordAddForm = this.getForm();
   }
 
   getForm(): FormGroup {
