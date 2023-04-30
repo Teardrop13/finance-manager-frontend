@@ -4,7 +4,7 @@
   <app-category-form [categoryType]="type" (onCategoryAdded)="loadCategories()"></app-category-form>
 
   <div cdkDropList class="categories-list" (cdkDropListDropped)="drop($event)">
-    <div class="box" *ngFor="let category of categories" cdkDrag>
+    <div class="box" *ngFor="let category of categories" cdkDrag [cdkDragStartDelay]="500">
       {{category.name}}
       <button mat-icon-button color="accent" (click)="delete(category)">
         <mat-icon>delete</mat-icon>
