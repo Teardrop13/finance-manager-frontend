@@ -21,6 +21,9 @@ export class CategoryEditorTabComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadCategories();
+    this.snackBar.open('Hold and drag to reorder.', 'OK', {
+      duration: 2000
+    })
   }
 
   ngOnDestroy(): void {
