@@ -3,7 +3,6 @@
     <div class="menu">
       <a [routerLink]="'/home/summary'" mat-button>Summary</a>
       <a [routerLink]="'/home/categories'" mat-button>Categories</a>
-      <a [routerLink]="'/home/analysis'" mat-button>Analysis</a>
       <a [routerLink]="'/home/history'" mat-button>History</a>
       <a (click)="logout()" mat-button>Log out</a>
     </div>
@@ -16,7 +15,6 @@
   <div *ngIf="showMenu" class="menu-dropdown">
     <a [routerLink]="'/home/summary'" mat-button (click)="toggleMenu()">Summary</a>
     <a [routerLink]="'/home/categories'" mat-button (click)="toggleMenu()">Categories</a>
-    <a [routerLink]="'/home/analysis'" mat-button (click)="toggleMenu()">Analysis</a>
     <a [routerLink]="'/home/history'" mat-button (click)="toggleMenu()">History</a>
     <a (click)="logout()" mat-button>Log out</a>
   </div>
