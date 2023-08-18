@@ -85,7 +85,8 @@ $finance-manager-frontend-theme: mat.define-light-theme((color: (primary: $finan
 html, body { height: 100%; }
 
 */
-body {
+body, *  {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
 }

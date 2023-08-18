@@ -1,13 +1,12 @@
-<form class="form"
-      [formGroup]="categoryAddForm"
+<form [formGroup]="categoryAddForm"
       role="form"
       (submit)="addCategory()">
 
-  <mat-form-field class="input">
+  <mat-form-field class="input" appearance="fill">
     <mat-label>Category name</mat-label>
     <input type="text" matInput formControlName="name">
   </mat-form-field>
 
-  <button mat-icon-button color="accent" type="submit"><mat-icon>add</mat-icon></button>
+  <button mat-flat-button color="accent" type="submit">Add</button>
 
 </form>

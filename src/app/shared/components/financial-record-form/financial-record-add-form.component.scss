@@ -3,7 +3,13 @@ form {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    align-items: center;
     justify-content: center;
+
+    button {
+        padding: 20px 30px;
+        color: white;
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -13,10 +19,13 @@ form {
         align-items: stretch;
         margin-left: 10px;
         margin-right: 10px;
+        margin-bottom: 50px;
+        
+        button {
+            margin-left: 0px;
+            margin-right: 0px;
+            color: white;
+        }
     }
 
-    form button {
-        margin-left: auto;
-        margin-right: auto;
-    }
 }
