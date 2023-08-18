@@ -1,3 +1,7 @@
+<app-period-selector (onPeriodSelected)="changePeriod($event)"></app-period-selector>
+
+<app-record-type-select (onTypeChanged)="changeRecordType($event)"></app-record-type-select>
+
 <div class="table-container">
   <div class="table">
     <table mat-table [dataSource]="records" class="mat-elevation-z8">

@@ -1,15 +1,16 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTable } from '@angular/material/table';
 import { FinancialRecordService } from '@core/services/financial-record.service';
-import { FinancialRecord } from '@shared/models/financial-record.model';
+import { FinancialRecord, FinancialRecordType } from '@shared/models/financial-record.model';
+import { AccountingPeriod } from '@shared/models/period.model';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-history-tab',
   templateUrl: './history-tab.component.html',
   styleUrls: ['./history-tab.component.scss']
 })
-export class HistoryTabComponent implements OnInit, OnDestroy {
+export class HistoryTabComponent implements OnDestroy {
 
   @ViewChild(MatTable) table: MatTable<FinancialRecord>;
   displayedColumns: string[] = ['amount', 'category', 'transactionDate', 'description', 'action'];
@@ -17,6 +18,8 @@ export class HistoryTabComponent implements OnInit, OnDestroy {
   page = 0;
   pageSize = 10;
   availableRecords = 0;
+  recordType: FinancialRecordType = FinancialRecordType.EXPENSE;
+  selectedPeriod: AccountingPeriod;
 
   records: FinancialRecord[] = [];
 
@@ -24,28 +27,8 @@ export class HistoryTabComponent implements OnInit, OnDestroy {
 
   constructor(private financialRecordService: FinancialRecordService) {}
 
-  ngOnInit(): void {
-    this.loadCount();
-    this.loadRecords();
-  }
-
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
-  }
-
-  loadCount() {
-    this.subscriptions.push(this.financialRecordService.getCount().subscribe({
-      next: number => this.availableRecords = number
-    }))
-  }
-
-  loadRecords() {
-    this.subscriptions.push(this.financialRecordService.getAll(this.page, this.pageSize).subscribe({
-      next: records => {
-        this.records.splice(0, this.records.length, ...records);
-        this.table.renderRows();
-      }
-    }));
   }
 
   handlePageEvent(e: PageEvent) {
@@ -62,9 +45,36 @@ export class HistoryTabComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.financialRecordService.remove(record.id).subscribe({
       next: res => {
-        this.loadRecords()
+        this.loadRecords();
+        this.loadCount();
       }
     }));
   }
 
+  changePeriod(period: AccountingPeriod) {
+    this.selectedPeriod = period;
+    this.loadRecords();
+    this.loadCount();
+  }
+
+  changeRecordType(type: FinancialRecordType) {
+    this.recordType = type;
+    this.loadRecords();
+    this.loadCount();
+  }
+
+  loadRecords() {
+    this.subscriptions.push(this.financialRecordService.get(this.recordType, this.selectedPeriod, this.page, this.pageSize).subscribe({
+      next: records => {
+        this.records = records;
+        this.table.renderRows();
+      }
+    }));
+  }
+
+  loadCount() {
+    this.subscriptions.push(this.financialRecordService.getCount(this.recordType, this.selectedPeriod).subscribe({
+      next: number => this.availableRecords = number
+    }))
+  }
 }
