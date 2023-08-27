@@ -1,7 +1,7 @@
 export interface FinancialRecord {
   id?: number | null,
   amount?: number | null,
-  transactionDate?: Date | null,
+  transactionDate?: string | null,
   category?: string | null,
   description?: string | null,
   type?: string | null,

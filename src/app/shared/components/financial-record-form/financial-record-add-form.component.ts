@@ -4,6 +4,7 @@ import { CategoryService } from '@core/services/category.service';
 import { FinancialRecordService } from '@core/services/financial-record.service';
 import { Category } from '@shared/models/category.model';
 import { FinancialRecord, FinancialRecordType } from '@shared/models/financial-record.model';
+import * as dayjs from 'dayjs';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -58,9 +59,9 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
 
   addRecord() {
     if (this.recordAddForm.valid) {
-      const financialRecord = this.recordAddForm.value;
+      const financialRecord: FinancialRecord = this.recordAddForm.value;
       financialRecord.type = this.type;
-      console.log(financialRecord)
+      financialRecord.transactionDate = dayjs(financialRecord.transactionDate).format('DD-MM-YYYY');
       this.subscriptions.push(this.financialRecordService.add(financialRecord)
         .subscribe({
           next: r => {

@@ -6,7 +6,20 @@ import { FinancialRecordAddFormComponent } from './components/financial-record-f
 import { SummaryChartComponent } from './components/summary-chart/summary-chart.component';
 import { RecordTypeSelectComponent } from './components/record-type-select/record-type-select.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
+export const FORMATS = {
+  parse: {
+    dateInput: 'DD-MM-YYYY',
+  },
+  display: {
+    dateInput: 'DD-MM-YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 
 
 @NgModule({
@@ -27,6 +40,10 @@ import { CategoryFormComponent } from './components/category-form/category-form.
     SummaryChartComponent,
     RecordTypeSelectComponent,
     CategoryFormComponent
+  ],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: FORMATS }
   ]
 })
 export class SharedModule {}
