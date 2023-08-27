@@ -30,6 +30,7 @@ export class AuthenticationService {
   }
 
   logout() {
+    this.http.post('/api/auth/logout', null).subscribe();
     this.removeToken();
     this.router.navigateByUrl('/login');
   }
