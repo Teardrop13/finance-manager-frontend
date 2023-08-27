@@ -7,8 +7,9 @@ import { MaterialModule } from '../material/material.module';
 import { EnsureModuleLoadedOnceGuard } from './EnsureModuleLoadedOnceGuard';
 import { LoginComponent } from './authentication/components/login/login.component';
 import { RegistrationComponent } from './authentication/components/registration/registration.component';
-import { AuthenticationInterceptorService } from './interceptors/authentication-interceptor.service';
+import { TokenSharing } from './authentication/services/token-sharing.service';
 import { NavbarComponent } from './header/navbar/navbar.component';
+import { AuthenticationInterceptorService } from './interceptors/authentication-interceptor.service';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -26,6 +27,7 @@ import { NavbarComponent } from './header/navbar/navbar.component';
     NavbarComponent
   ],
   providers: [
+    TokenSharing,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthenticationInterceptorService,
