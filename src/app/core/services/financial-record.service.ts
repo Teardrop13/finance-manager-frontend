@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FinancialRecord, FinancialRecordType } from '@shared/models/financial-record.model';
+import { CreateFinancialRecordCommand, FinancialRecord, FinancialRecordId, FinancialRecordType } from '@shared/models/financial-record.model';
 import { AccountingPeriod } from '@shared/models/period.model';
 import { Observable } from 'rxjs';
 
@@ -11,11 +11,16 @@ export class FinancialRecordService {
 
   constructor(private http: HttpClient) {}
 
-  add(financialRecord: FinancialRecord): Observable<FinancialRecord> {
-    return this.http.post<FinancialRecord>('/api/records', financialRecord);
+  create(command: CreateFinancialRecordCommand): Observable<FinancialRecord> {
+    return this.http.post<FinancialRecord>('/api/records', command);
   }
 
-  getPage(type: FinancialRecordType, period: AccountingPeriod, page: number, pageSize: number, sortBy: string, isAscending: boolean): Observable<FinancialRecord[]> {
+  getPage(type: FinancialRecordType,
+    period: AccountingPeriod,
+    page: number,
+    pageSize: number,
+    sortBy: string,
+    isAscending: boolean): Observable<FinancialRecord[]> {
     const params = new HttpParams()
       .append('type', type)
       .append('periodId', period.id)
@@ -50,7 +55,7 @@ export class FinancialRecordService {
     }
   }
 
-  remove(id: number) {
+  remove(id: FinancialRecordId) {
     return this.http.delete(`/api/records/${id}`);
   }
 }

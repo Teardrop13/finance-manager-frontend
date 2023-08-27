@@ -40,7 +40,7 @@ export class CategoryFormComponent implements OnInit, OnDestroy {
   addCategory() {
     if (this.categoryAddForm.valid) {
       const name = this.categoryAddForm.value.name ?? '';
-      this.categoryService.add(name, this.categoryType).subscribe({
+      this.categoryService.add({ name: name, type: this.categoryType }).subscribe({
         next: c => {
           this.snackBar.open('Category added!', 'OK', {
             duration: 3000

@@ -1,5 +1,7 @@
 export interface AccountingPeriod {
-  id: number,
-  startsOn: Date,
-  endsOn: Date
+  id: AccountingPeriodId,
+  startsOn: string,
+  endsOn: string
 }
+
+export type AccountingPeriodId = number & { _accountingPeriodIdBrand: never };

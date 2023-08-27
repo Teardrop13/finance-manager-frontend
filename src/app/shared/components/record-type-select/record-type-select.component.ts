@@ -13,6 +13,6 @@ export class RecordTypeSelectComponent {
   onTypeChanged: EventEmitter<FinancialRecordType> = new EventEmitter();
 
   changeChartType(change: MatRadioChange) {
-    this.onTypeChanged.emit(FinancialRecordType[change.value.toUpperCase()]);
+    this.onTypeChanged.emit(change.value);
   }
 }

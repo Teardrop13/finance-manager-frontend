@@ -11,7 +11,7 @@ import { AccountingPeriod } from '@shared/models/period.model';
 })
 export class SummaryTabComponent {
 
-  recordType: FinancialRecordType = FinancialRecordType.EXPENSE;
+  recordType: FinancialRecordType = 'expense';
   selectedPeriod: AccountingPeriod;
 
   summaries: Summary[] = [];

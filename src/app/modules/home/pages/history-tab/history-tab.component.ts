@@ -19,7 +19,7 @@ export class HistoryTabComponent implements OnDestroy {
   page = 0;
   pageSize = 10;
   availableRecords = 0;
-  recordType: FinancialRecordType = FinancialRecordType.EXPENSE;
+  recordType: FinancialRecordType = 'expense';
   selectedPeriod: AccountingPeriod;
 
   sortBy = "transactionDate";
@@ -42,12 +42,7 @@ export class HistoryTabComponent implements OnDestroy {
   }
 
   remove(record: FinancialRecord) {
-    if (!record.id) {
-      console.error('Record does not have id');
-      return
-    }
-
-    this.subscriptions.push(this.financialRecordService.remove(record.id).subscribe({
+      this.subscriptions.push(this.financialRecordService.remove(record.id).subscribe({
       next: res => {
         this.loadRecords();
         this.loadCount();

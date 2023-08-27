@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, S
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { CategoryService } from '@core/services/category.service';
 import { FinancialRecordService } from '@core/services/financial-record.service';
-import { Category } from '@shared/models/category.model';
-import { FinancialRecord, FinancialRecordType } from '@shared/models/financial-record.model';
+import { Category, CategoryName } from '@shared/models/category.model';
+import { CreateFinancialRecordCommand, FinancialRecord, FinancialRecordType } from '@shared/models/financial-record.model';
 import * as dayjs from 'dayjs';
 import { Subscription } from 'rxjs';
 
@@ -59,10 +59,10 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
 
   addRecord() {
     if (this.recordAddForm.valid) {
-      const financialRecord: FinancialRecord = this.recordAddForm.value;
-      financialRecord.type = this.type;
-      financialRecord.transactionDate = dayjs(financialRecord.transactionDate).format('DD-MM-YYYY');
-      this.subscriptions.push(this.financialRecordService.add(financialRecord)
+      const createCommand: CreateFinancialRecordCommand = this.recordAddForm.value;
+      createCommand.type = this.type;
+      createCommand.transactionDate = dayjs(createCommand.transactionDate).format('DD-MM-YYYY');
+      this.subscriptions.push(this.financialRecordService.create(createCommand)
         .subscribe({
           next: r => {
             this.onSubmit.emit(r);
@@ -81,7 +81,7 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
     return new FormGroup({
       amount: new FormControl<number | null>(null, [Validators.required, Validators.min(0)]),
       transactionDate: new FormControl<Date | null>(new Date(), [Validators.required]),
-      category: new FormControl<string | null>(null, [Validators.required]),
+      category: new FormControl<CategoryName | null>(null, [Validators.required]),
       description: new FormControl<string | null>(null, []),
     });
   }

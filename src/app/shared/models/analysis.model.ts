@@ -1,4 +1,6 @@
+import { CategoryName } from "./category.model";
+
 export interface Summary {
-  category: string,
+  category: CategoryName,
   amount: number
 }

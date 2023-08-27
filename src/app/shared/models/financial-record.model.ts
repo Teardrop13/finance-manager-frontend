@@ -1,13 +1,26 @@
+import { CategoryName } from "./category.model";
+
 export interface FinancialRecord {
-  id?: number | null,
-  amount?: number | null,
-  transactionDate?: string | null,
-  category?: string | null,
-  description?: string | null,
-  type?: string | null,
+  id: FinancialRecordId,
+  amount: number,
+  transactionDate: string,
+  category: CategoryName,
+  description?: string,
+  type: FinancialRecordType,
 }
 
-export enum FinancialRecordType {
-  INCOME = 'income',
-  EXPENSE = 'expense',
+export interface UpdateFinancialRecordCommand extends CreateFinancialRecordCommand {
+  recordId: FinancialRecordId
 }
+
+export interface CreateFinancialRecordCommand {
+  description: string | undefined,
+  amount: number,
+  category: CategoryName,
+  type: FinancialRecordType,
+  transactionDate: string,
+}
+
+export declare type FinancialRecordType = 'income' | 'expense';
+
+export type FinancialRecordId = number & { _financialRecordIdBrand: never };

@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class CategoryEditorTabComponent implements OnInit, OnDestroy {
 
-  type: FinancialRecordType = FinancialRecordType.EXPENSE;
+  type: FinancialRecordType = 'expense';
   categories: Category[] = [];
   private subscribtions: Subscription[] = [];
 
