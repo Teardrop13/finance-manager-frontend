@@ -1,5 +1,6 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { FinancialRecordService } from '@core/services/financial-record.service';
 import { FinancialRecord, FinancialRecordType } from '@shared/models/financial-record.model';
@@ -20,6 +21,9 @@ export class HistoryTabComponent implements OnDestroy {
   availableRecords = 0;
   recordType: FinancialRecordType = FinancialRecordType.EXPENSE;
   selectedPeriod: AccountingPeriod;
+
+  sortBy = "transactionDate";
+  isAscending = false;
 
   records: FinancialRecord[] = [];
 
@@ -63,8 +67,20 @@ export class HistoryTabComponent implements OnDestroy {
     this.loadCount();
   }
 
+  changeSorting(sortState: Sort) {
+    if (sortState.direction === '') {
+      this.sortBy = 'transactionDate';
+      this.isAscending = false;
+    } else {
+      this.sortBy = sortState.active;
+      this.isAscending = sortState.direction === 'asc';
+    }
+
+    this.loadRecords();
+  }
+
   loadRecords() {
-    this.subscriptions.push(this.financialRecordService.get(this.recordType, this.selectedPeriod, this.page, this.pageSize).subscribe({
+    this.subscriptions.push(this.financialRecordService.getPage(this.recordType, this.selectedPeriod, this.page, this.pageSize, this.sortBy, this.isAscending).subscribe({
       next: records => {
         this.records = records;
         this.table.renderRows();

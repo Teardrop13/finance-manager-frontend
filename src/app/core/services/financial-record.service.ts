@@ -15,12 +15,14 @@ export class FinancialRecordService {
     return this.http.post<FinancialRecord>('/api/records', financialRecord);
   }
 
-  get(type: FinancialRecordType, period: AccountingPeriod, page: number, pageSize: number): Observable<FinancialRecord[]> {
+  getPage(type: FinancialRecordType, period: AccountingPeriod, page: number, pageSize: number, sortBy: string, isAscending: boolean): Observable<FinancialRecord[]> {
     const params = new HttpParams()
       .append('type', type)
       .append('periodId', period.id)
       .append("page", page)
-      .append("pageSize", pageSize);
+      .append("pageSize", pageSize)
+      .append("sortBy", sortBy)
+      .append("isAscending", isAscending);
 
     return this.http.get<FinancialRecord[]>('/api/records', { params: params });
   }
