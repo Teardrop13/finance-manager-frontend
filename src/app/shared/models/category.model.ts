@@ -1,4 +1,4 @@
-import { FinancialRecordType } from "./financial-record.model";
+import { Brand, CategoryName, FinancialRecordType } from "./common.model";
 
 export interface Category {
   id: CategoryId,
@@ -11,6 +11,4 @@ export interface AddCategoryCommand {
   type: FinancialRecordType
 }
 
-export type CategoryId = number & { _categoryIdBrand: never };
-
-export type CategoryName = string & { _categoryIdBrand: never };
+export type CategoryId = Brand<number, 'CategoryId'>

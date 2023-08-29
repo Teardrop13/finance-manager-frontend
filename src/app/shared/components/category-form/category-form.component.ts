@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoryService } from '@core/services/category.service';
 import { Category } from '@shared/models/category.model';
-import { FinancialRecordType } from '@shared/models/financial-record.model';
+import { FinancialRecordType } from '@shared/models/common.model';
 import { Subscription } from 'rxjs';
 
 @Component({

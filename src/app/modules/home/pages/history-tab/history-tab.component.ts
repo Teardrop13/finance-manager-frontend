@@ -3,8 +3,9 @@ import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { FinancialRecordService } from '@core/services/financial-record.service';
-import { FinancialRecord, FinancialRecordType } from '@shared/models/financial-record.model';
-import { AccountingPeriod } from '@shared/models/period.model';
+import { AccountingPeriod } from '@shared/models/accounting-period.model';
+import { FinancialRecordType } from '@shared/models/common.model';
+import { FinancialRecord } from '@shared/models/financial-record.model';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-history-tab',

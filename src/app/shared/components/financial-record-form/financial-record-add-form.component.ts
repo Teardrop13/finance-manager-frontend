@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, S
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { CategoryService } from '@core/services/category.service';
 import { FinancialRecordService } from '@core/services/financial-record.service';
-import { Category, CategoryName } from '@shared/models/category.model';
-import { CreateFinancialRecordCommand, FinancialRecord, FinancialRecordType } from '@shared/models/financial-record.model';
+import { Category } from '@shared/models/category.model';
+import { Amount, CategoryName, FinancialRecordType } from '@shared/models/common.model';
+import { CreateFinancialRecordCommand, FinancialRecord } from '@shared/models/financial-record.model';
 import * as dayjs from 'dayjs';
 import { Subscription } from 'rxjs';
 
@@ -79,7 +80,7 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
 
   getForm(): FormGroup {
     return new FormGroup({
-      amount: new FormControl<number | null>(null, [Validators.required, Validators.min(0)]),
+      amount: new FormControl<Amount | null>(null, [Validators.required, Validators.min(0)]),
       transactionDate: new FormControl<Date | null>(new Date(), [Validators.required]),
       category: new FormControl<CategoryName | null>(null, [Validators.required]),
       description: new FormControl<string | null>(null, []),

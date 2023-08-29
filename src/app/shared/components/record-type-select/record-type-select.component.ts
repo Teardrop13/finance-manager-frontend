@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
-import { FinancialRecordType } from '@shared/models/financial-record.model';
+import { FinancialRecordType } from '@shared/models/common.model';
 
 @Component({
   selector: 'app-record-type-select',

@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AccountingPeriod } from '@shared/models/period.model';
+import { AccountingPeriod } from '@shared/models/accounting-period.model';
 import { Observable } from 'rxjs';
 
 @Injectable({

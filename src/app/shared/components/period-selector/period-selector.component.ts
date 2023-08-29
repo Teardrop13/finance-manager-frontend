@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { AccountingPeriodService } from '@core/services/accounting-period.service';
-import { AccountingPeriod } from '@shared/models/period.model';
+import { AccountingPeriod } from '@shared/models/accounting-period.model';
 import { Subscription } from 'rxjs';
 
 @Component({

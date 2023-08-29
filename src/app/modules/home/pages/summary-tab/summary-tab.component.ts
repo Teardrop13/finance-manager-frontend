@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { AnalysisService } from '@core/services/analysis.service';
+import { AccountingPeriod } from '@shared/models/accounting-period.model';
 import { Summary } from '@shared/models/analysis.model';
-import { FinancialRecordType } from '@shared/models/financial-record.model';
-import { AccountingPeriod } from '@shared/models/period.model';
+import { FinancialRecordType } from '@shared/models/common.model';
 
 @Component({
   selector: 'app-summary-tab',

@@ -1,8 +1,8 @@
-import { CategoryName } from "./category.model";
+import { Amount, Brand, CategoryName, FinancialRecordType } from "./common.model";
 
 export interface FinancialRecord {
   id: FinancialRecordId,
-  amount: number,
+  amount: Amount,
   transactionDate: string,
   category: CategoryName,
   description?: string,
@@ -15,12 +15,10 @@ export interface UpdateFinancialRecordCommand extends CreateFinancialRecordComma
 
 export interface CreateFinancialRecordCommand {
   description: string | undefined,
-  amount: number,
+  amount: Amount,
   category: CategoryName,
   type: FinancialRecordType,
   transactionDate: string,
 }
 
-export declare type FinancialRecordType = 'income' | 'expense';
-
-export type FinancialRecordId = number & { _financialRecordIdBrand: never };
+export type FinancialRecordId = Brand<number, 'FinancialRecordId'>

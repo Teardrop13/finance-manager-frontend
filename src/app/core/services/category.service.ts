@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AddCategoryCommand, Category, CategoryId } from '@shared/models/category.model';
-import { FinancialRecordType } from '@shared/models/financial-record.model';
+import { FinancialRecordType } from '@shared/models/common.model';
 import { Observable, of } from 'rxjs';
 
 @Injectable({

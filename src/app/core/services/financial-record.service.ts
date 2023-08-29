@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CreateFinancialRecordCommand, FinancialRecord, FinancialRecordId, FinancialRecordType } from '@shared/models/financial-record.model';
-import { AccountingPeriod } from '@shared/models/period.model';
+import { AccountingPeriod } from '@shared/models/accounting-period.model';
+import { FinancialRecordType } from '@shared/models/common.model';
+import { CreateFinancialRecordCommand, FinancialRecord, FinancialRecordId } from '@shared/models/financial-record.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
