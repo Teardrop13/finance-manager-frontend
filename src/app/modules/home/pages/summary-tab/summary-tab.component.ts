@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AnalysisService } from '@core/services/analysis.service';
 import { AccountingPeriod } from '@shared/models/accounting-period.model';
-import { Summary } from '@shared/models/analysis.model';
+import { CategorySummary } from '@shared/models/analysis.model';
 import { FinancialRecordType } from '@shared/models/common.model';
 
 @Component({
@@ -14,7 +14,7 @@ export class SummaryTabComponent {
   recordType: FinancialRecordType = 'expense';
   selectedPeriod: AccountingPeriod;
 
-  summaries: Summary[] = [];
+  summaries: CategorySummary[] = [];
 
   constructor(private analysisService: AnalysisService) {}
 
@@ -29,7 +29,7 @@ export class SummaryTabComponent {
   }
 
   loadSummary() {
-    this.analysisService.getSummary(this.recordType, this.selectedPeriod).subscribe({
+    this.analysisService.getSummaryByCategory(this.recordType, this.selectedPeriod).subscribe({
       next: summaries => this.summaries = summaries
     });
   }

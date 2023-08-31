@@ -2,6 +2,6 @@
 
 <app-record-type-select (onTypeChanged)="changeRecordType($event)"></app-record-type-select>
 
-<app-summary-chart [summaries]="summaries"></app-summary-chart>
+<app-summary-by-category-chart [summaries]="summaries"></app-summary-by-category-chart>
 
 <app-financial-record-add-form [type]="recordType" (onSubmit)="loadSummary()"></app-financial-record-add-form>

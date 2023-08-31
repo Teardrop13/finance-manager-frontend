@@ -1,5 +1,22 @@
 import { Amount, Brand, CategoryName, FinancialRecordType } from "./common.model";
 
+export interface UpdateFinancialRecordRequest extends CreateFinancialRecordRequest {
+  recordId: FinancialRecordId
+}
+
+export interface CreateFinancialRecordRequest {
+  description: string | undefined,
+  amount: Amount,
+  category: CategoryName,
+  type: FinancialRecordType,
+  transactionDate: string,
+}
+
+export interface FinancialRecordsHistory {
+  count: number,
+  records: FinancialRecord[]
+}
+
 export interface FinancialRecord {
   id: FinancialRecordId,
   amount: Amount,
@@ -7,18 +24,6 @@ export interface FinancialRecord {
   category: CategoryName,
   description?: string,
   type: FinancialRecordType,
-}
-
-export interface UpdateFinancialRecordCommand extends CreateFinancialRecordCommand {
-  recordId: FinancialRecordId
-}
-
-export interface CreateFinancialRecordCommand {
-  description: string | undefined,
-  amount: Amount,
-  category: CategoryName,
-  type: FinancialRecordType,
-  transactionDate: string,
 }
 
 export type FinancialRecordId = Brand<number, 'FinancialRecordId'>

@@ -1,4 +1,4 @@
-<div id="chart-container">
+<div id="chart-container" (window:resize)="reloadChart()">
   <canvas id="chart"></canvas>
   <div class="no-data" *ngIf="summaries.length == 0">
     No data

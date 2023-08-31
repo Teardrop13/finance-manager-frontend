@@ -4,7 +4,7 @@ import { CategoryService } from '@core/services/category.service';
 import { FinancialRecordService } from '@core/services/financial-record.service';
 import { Category } from '@shared/models/category.model';
 import { Amount, CategoryName, FinancialRecordType } from '@shared/models/common.model';
-import { CreateFinancialRecordCommand, FinancialRecord } from '@shared/models/financial-record.model';
+import { CreateFinancialRecordRequest, FinancialRecord } from '@shared/models/financial-record.model';
 import * as dayjs from 'dayjs';
 import { Subscription } from 'rxjs';
 
@@ -60,10 +60,10 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
 
   addRecord() {
     if (this.recordAddForm.valid) {
-      const createCommand: CreateFinancialRecordCommand = this.recordAddForm.value;
-      createCommand.type = this.type;
-      createCommand.transactionDate = dayjs(createCommand.transactionDate).format('DD-MM-YYYY');
-      this.subscriptions.push(this.financialRecordService.create(createCommand)
+      const request: CreateFinancialRecordRequest = this.recordAddForm.value;
+      request.type = this.type;
+      request.transactionDate = dayjs(request.transactionDate).format('DD-MM-YYYY');
+      this.subscriptions.push(this.financialRecordService.create(request)
         .subscribe({
           next: r => {
             this.onSubmit.emit(r);

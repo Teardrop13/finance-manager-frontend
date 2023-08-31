@@ -43,10 +43,9 @@ export class HistoryTabComponent implements OnDestroy {
   }
 
   remove(record: FinancialRecord) {
-      this.subscriptions.push(this.financialRecordService.remove(record.id).subscribe({
+    this.subscriptions.push(this.financialRecordService.remove(record.id).subscribe({
       next: res => {
         this.loadRecords();
-        this.loadCount();
       }
     }));
   }
@@ -54,13 +53,11 @@ export class HistoryTabComponent implements OnDestroy {
   changePeriod(period: AccountingPeriod) {
     this.selectedPeriod = period;
     this.loadRecords();
-    this.loadCount();
   }
 
   changeRecordType(type: FinancialRecordType) {
     this.recordType = type;
     this.loadRecords();
-    this.loadCount();
   }
 
   changeSorting(sortState: Sort) {
@@ -77,16 +74,11 @@ export class HistoryTabComponent implements OnDestroy {
 
   loadRecords() {
     this.subscriptions.push(this.financialRecordService.getPage(this.recordType, this.selectedPeriod, this.page, this.pageSize, this.sortBy, this.isAscending).subscribe({
-      next: records => {
-        this.records = records;
+      next: history => {
+        this.records = history.records;
+        this.availableRecords = history.count;
         this.table.renderRows();
       }
     }));
-  }
-
-  loadCount() {
-    this.subscriptions.push(this.financialRecordService.getCount(this.recordType, this.selectedPeriod).subscribe({
-      next: number => this.availableRecords = number
-    }))
   }
 }

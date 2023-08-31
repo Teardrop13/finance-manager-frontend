@@ -1,13 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PeriodSelectorComponent } from './components/period-selector/period-selector.component';
-import { MaterialModule } from '../material/material.module';
-import { FinancialRecordAddFormComponent } from './components/financial-record-form/financial-record-add-form.component';
-import { SummaryChartComponent } from './components/summary-chart/summary-chart.component';
-import { RecordTypeSelectComponent } from './components/record-type-select/record-type-select.component';
-import { CategoryFormComponent } from './components/category-form/category-form.component';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { NgModule } from '@angular/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MaterialModule } from '../material/material.module';
+import { AccountingPeriodSummaryChartComponent } from './components/accounting-period-summary-chart/accounting-period-summary-chart.component';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
+import { FinancialRecordAddFormComponent } from './components/financial-record-form/financial-record-add-form.component';
+import { PeriodSelectorComponent } from './components/period-selector/period-selector.component';
+import { RecordTypeSelectComponent } from './components/record-type-select/record-type-select.component';
+import { SummaryChartComponent } from './components/summary-by-category-chart/summary-by-category-chart.component';
 
 export const FORMATS = {
   parse: {
@@ -28,7 +29,9 @@ export const FORMATS = {
     FinancialRecordAddFormComponent,
     SummaryChartComponent,
     RecordTypeSelectComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    AccountingPeriodSummaryChartComponent,
+    AccountingPeriodSummaryChartComponent
   ],
   imports: [
     CommonModule,
@@ -38,6 +41,7 @@ export const FORMATS = {
     PeriodSelectorComponent,
     FinancialRecordAddFormComponent,
     SummaryChartComponent,
+    AccountingPeriodSummaryChartComponent,
     RecordTypeSelectComponent,
     CategoryFormComponent
   ],

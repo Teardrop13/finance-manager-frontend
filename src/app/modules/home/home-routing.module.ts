@@ -16,6 +16,10 @@ const routes: Routes = [
     component: CategoryEditorTabComponent
   },
   {
+    path: 'analysis',
+    component: AnalysisTabComponent
+  },
+  {
     path: 'history',
     component: HistoryTabComponent
   },
