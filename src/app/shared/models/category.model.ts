@@ -6,9 +6,19 @@ export interface Category {
   name: CategoryName
 }
 
-export interface AddCategoryCommand {
+export interface AddCategoryRequest {
   name: string,
   type: FinancialRecordType
+}
+
+export interface UpdateCategoriesRequest {
+  updateCategoryRequests: UpdateCategoryRequest[]
+}
+
+export interface UpdateCategoryRequest {
+  id: CategoryId,
+  priority: number,
+  name: CategoryName
 }
 
 export type CategoryId = Brand<number, 'CategoryId'>

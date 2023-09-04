@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, SimpleChanges } from '@angular/core';
 import { AccountingPeriodSummary } from '@shared/models/analysis.model';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
+import { Observable, Subscription, debounce, fromEvent, timer } from 'rxjs';
 
 @Component({
   selector: 'app-accounting-period-summary-chart',
@@ -14,17 +15,37 @@ export class AccountingPeriodSummaryChartComponent implements OnDestroy {
 
   chart: Chart;
 
+  windowWidth: number;
+
+  resizeObservable$: Observable<Event>;
+  resizeSubscription$: Subscription;
+
   ngOnInit(): void {
     Chart.register(...registerables);
     if (this.summary) {
       this.loadChart();
     }
+
+    this.windowWidth = window.innerWidth
+
+    this.resizeObservable$ = fromEvent(window, 'resize')
+
+    this.resizeSubscription$ = this.resizeObservable$
+      .pipe(debounce(() => timer(200)))
+      .subscribe(evt => {
+        const window = evt.target as Window;
+        if (window.innerWidth != this.windowWidth) {
+          this.windowWidth = window.innerWidth
+          this.reloadChart();
+        }
+      })
   }
 
   ngOnDestroy(): void {
     if (this.chart) {
       this.chart.destroy();
     }
+    this.resizeSubscription$.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -45,7 +66,6 @@ export class AccountingPeriodSummaryChartComponent implements OnDestroy {
   }
 
   getConfig(summary: AccountingPeriodSummary): ChartConfiguration {
-
     return {
       type: 'bar',
       data: {

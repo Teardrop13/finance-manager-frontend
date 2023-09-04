@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AddCategoryCommand, Category, CategoryId } from '@shared/models/category.model';
+import { AddCategoryRequest, Category, CategoryId, UpdateCategoriesRequest, UpdateCategoryRequest } from '@shared/models/category.model';
 import { FinancialRecordType } from '@shared/models/common.model';
 import { Observable, of } from 'rxjs';
 
@@ -22,11 +22,11 @@ export class CategoryService {
     }
   }
 
-  saveMultiple(categories: Category[]) {
-    return this.http.put('/api/categories', categories);
+  updateMultiple(request: UpdateCategoriesRequest) {
+    return this.http.put('/api/categories', request);
   }
 
-  add(command: AddCategoryCommand): Observable<Category> {
+  add(command: AddCategoryRequest): Observable<Category> {
     return this.http.post<Category>('/api/categories', command);
   }
 

@@ -2,7 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CategoryService } from '@core/services/category.service';
-import { Category } from '@shared/models/category.model';
+import { Category, UpdateCategoriesRequest } from '@shared/models/category.model';
 import { FinancialRecordType } from '@shared/models/common.model';
 import { Subscription } from 'rxjs';
 @Component({
@@ -43,7 +43,12 @@ export class CategoryEditorTabComponent implements OnInit, OnDestroy {
 
   private reorderCategories() {
     this.categories.forEach((category, index) => category.priority = index + 1);
-    this.subscribtions.push(this.categoryService.saveMultiple(this.categories).subscribe({
+
+    const updateRequest: UpdateCategoriesRequest = {
+      updateCategoryRequests: this.categories.map(({ id, priority, name }) => ({ id, priority, name }))
+    }
+
+    this.subscribtions.push(this.categoryService.updateMultiple(updateRequest).subscribe({
       next: res => this.snackBar.open('Categories saved', 'OK', {
         duration: 3000
       })
