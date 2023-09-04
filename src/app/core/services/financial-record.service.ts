@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AccountingPeriod } from '@shared/models/accounting-period.model';
 import { FinancialRecordType } from '@shared/models/common.model';
-import { CreateFinancialRecordRequest, FinancialRecord, FinancialRecordId, FinancialRecordsHistory } from '@shared/models/financial-record.model';
+import { CreateFinancialRecordRequest, FinancialRecord, FinancialRecordId, FinancialRecordsHistory, UpdateFinancialRecordRequest } from '@shared/models/financial-record.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,6 +14,10 @@ export class FinancialRecordService {
 
   create(request: CreateFinancialRecordRequest): Observable<FinancialRecord> {
     return this.http.post<FinancialRecord>('/api/records', request);
+  }
+
+  update(id: FinancialRecordId, request: UpdateFinancialRecordRequest): Observable<FinancialRecord> {
+    return this.http.put<FinancialRecord>(`/api/records/${id}`, request);
   }
 
   getPage(type: FinancialRecordType,
@@ -33,7 +37,7 @@ export class FinancialRecordService {
     return this.http.get<FinancialRecordsHistory>('/api/records', { params: params });
   }
 
-  remove(id: FinancialRecordId) {
+  delete(id: FinancialRecordId) {
     return this.http.delete(`/api/records/${id}`);
   }
 }

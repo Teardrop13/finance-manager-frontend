@@ -1,7 +1,10 @@
 import { Amount, Brand, CategoryName, FinancialRecordType } from "./common.model";
 
 export interface UpdateFinancialRecordRequest extends CreateFinancialRecordRequest {
-  recordId: FinancialRecordId
+  description: string | undefined,
+  amount: Amount,
+  category: CategoryName,
+  transactionDate: string,
 }
 
 export interface CreateFinancialRecordRequest {
