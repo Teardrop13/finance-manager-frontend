@@ -1,6 +1,64 @@
 <h1 mat-dialog-title>Edit record</h1>
-<div mat-dialog-content>
- 
-  {{ updateRequest | json }}
-  
+<div mat-dialog-content class="dialog-content">
+
+  <form *ngIf="categories.length > 0"
+        [formGroup]="recordEditForm"
+        role="form"
+        (submit)="updateRecord()">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Amount</mat-label>
+      <input type="number" matInput formControlName="amount">
+      <mat-error *ngIf="recordEditForm.get('amount')?.hasError('required')">
+        Amount is required
+      </mat-error>
+      <mat-error *ngIf="!recordEditForm.get('amount')?.hasError('required') && recordEditForm.get('amount')?.hasError('min')">
+        Amount should be greater than 0
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Date</mat-label>
+      <input matInput formControlName="transactionDate" [matDatepicker]="picker">
+      <mat-hint>DD-MM-YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="recordEditForm.get('transactionDate')?.hasError('required')">
+        Transaction date is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of categories" value="{{ category.name }}">{{ category.name }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="recordEditForm.get('category')?.hasError('required')">
+        Category is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <input type="text" matInput formControlName="description">
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+      <button mat-flat-button color="accent" mat-dialog-close cdkFocusInitial type="submit">Save</button>
+      <button mat-flat-button mat-dialog-close>Cancel</button>
+    </div>
+
+  </form>
+
+
+
+
+
+
+
+
+
+
+
+
 </div>

@@ -4,7 +4,7 @@
     {{ data.description }}
   </div>
   <div mat-dialog-actions>
-    <button mat-button mat-dialog-close (click)="runAction()">Confirm</button>
-    <button mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+    <button mat-flat-button mat-dialog-close cdkFocusInitial color="accent" (click)="runAction()">Confirm</button>
+    <button mat-flat-button mat-dialog-close>Cancel</button>
   </div>
 </div>

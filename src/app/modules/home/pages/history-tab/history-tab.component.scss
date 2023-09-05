@@ -13,6 +13,11 @@
     margin-top: 20px;
 }
 
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
 @media screen and (max-width: 800px) {
     .table-container {
         width: 100%;

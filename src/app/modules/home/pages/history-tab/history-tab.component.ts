@@ -68,40 +68,43 @@ export class HistoryTabComponent implements OnDestroy {
     this.loadRecords();
   }
 
-  loadRecords() {
-    this.subscriptions.push(this.financialRecordService.getPage(this.recordType, this.selectedPeriod, this.page, this.pageSize, this.sortBy, this.isAscending).subscribe({
-      next: history => {
-        this.records = history.records;
-        this.availableRecords = history.count;
-        this.table.renderRows();
-      }
-    }));
-  }
-
   editRecord(record: FinancialRecord) {
-      this.dialog.open(FinancialRecordEditDialogComponent, {
-        data: {
+    this.dialog.open(FinancialRecordEditDialogComponent, {
+      data: {
+        updateRequest: {
           description: record.description,
           amount: record.amount,
           category: record.category,
           transactionDate: record.transactionDate
-        }
-      });
+        },
+        recordId: record.id,
+        recordType: record.type,
+        onSave: () => this.loadRecords()
+      }
+    });
   }
 
   confirmDeleting(record: FinancialRecord) {
     this.dialog.open(ConfirmDialogComponent, {
       data: {
         description: `Are you sure you want to delete record from ${record.transactionDate}?`,
-        action: () => this.remove(record)
+        action: () => this.delete(record)
       }
     })
   }
 
-  remove(record: FinancialRecord) {
-      this.subscriptions.push(this.financialRecordService.delete(record.id).subscribe({
-      next: res => {
-        this.loadRecords();
+  delete(record: FinancialRecord) {
+    this.subscriptions.push(this.financialRecordService.delete(record.id).subscribe({
+      next: () => this.loadRecords()
+    }));
+  }
+
+  loadRecords() {
+    this.subscriptions.push(this.financialRecordService.getPage(this.recordType, this.selectedPeriod, this.page, this.pageSize, this.sortBy, this.isAscending).subscribe({
+      next: history => {
+        this.records = history.records;
+        this.availableRecords = history.count;
+        this.table.renderRows();
       }
     }));
   }
