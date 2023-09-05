@@ -1,8 +1,11 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { FinancialRecordService } from '@core/services/financial-record.service';
+import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
+import { FinancialRecordEditDialogComponent } from '@shared/components/financial-record-edit-dialog/financial-record-edit-dialog.component';
 import { AccountingPeriod } from '@shared/models/accounting-period.model';
 import { FinancialRecordType } from '@shared/models/common.model';
 import { FinancialRecord } from '@shared/models/financial-record.model';
@@ -30,7 +33,8 @@ export class HistoryTabComponent implements OnDestroy {
 
   subscriptions: Subscription[] = [];
 
-  constructor(private financialRecordService: FinancialRecordService) {}
+  constructor(private financialRecordService: FinancialRecordService,
+    public dialog: MatDialog) {}
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
@@ -40,14 +44,6 @@ export class HistoryTabComponent implements OnDestroy {
     this.pageSize = e.pageSize;
     this.page = e.pageIndex;
     this.loadRecords();
-  }
-
-  remove(record: FinancialRecord) {
-    this.subscriptions.push(this.financialRecordService.remove(record.id).subscribe({
-      next: res => {
-        this.loadRecords();
-      }
-    }));
   }
 
   changePeriod(period: AccountingPeriod) {
@@ -78,6 +74,34 @@ export class HistoryTabComponent implements OnDestroy {
         this.records = history.records;
         this.availableRecords = history.count;
         this.table.renderRows();
+      }
+    }));
+  }
+
+  editRecord(record: FinancialRecord) {
+      this.dialog.open(FinancialRecordEditDialogComponent, {
+        data: {
+          description: record.description,
+          amount: record.amount,
+          category: record.category,
+          transactionDate: record.transactionDate
+        }
+      });
+  }
+
+  confirmDeleting(record: FinancialRecord) {
+    this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        description: `Are you sure you want to delete record from ${record.transactionDate}?`,
+        action: () => this.remove(record)
+      }
+    })
+  }
+
+  remove(record: FinancialRecord) {
+      this.subscriptions.push(this.financialRecordService.delete(record.id).subscribe({
+      next: res => {
+        this.loadRecords();
       }
     }));
   }

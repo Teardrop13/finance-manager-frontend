@@ -9,6 +9,8 @@ import { FinancialRecordAddFormComponent } from './components/financial-record-f
 import { PeriodSelectorComponent } from './components/period-selector/period-selector.component';
 import { RecordTypeSelectComponent } from './components/record-type-select/record-type-select.component';
 import { SummaryChartComponent } from './components/summary-by-category-chart/summary-by-category-chart.component';
+import { FinancialRecordEditDialogComponent } from './components/financial-record-edit-dialog/financial-record-edit-dialog.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 export const FORMATS = {
   parse: {
@@ -31,7 +33,9 @@ export const FORMATS = {
     RecordTypeSelectComponent,
     CategoryFormComponent,
     AccountingPeriodSummaryChartComponent,
-    AccountingPeriodSummaryChartComponent
+    AccountingPeriodSummaryChartComponent,
+    FinancialRecordEditDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,
