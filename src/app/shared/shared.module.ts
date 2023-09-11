@@ -33,7 +33,6 @@ export const FORMATS = {
     RecordTypeSelectComponent,
     CategoryFormComponent,
     AccountingPeriodSummaryChartComponent,
-    AccountingPeriodSummaryChartComponent,
     FinancialRecordEditDialogComponent,
     ConfirmDialogComponent
   ],
