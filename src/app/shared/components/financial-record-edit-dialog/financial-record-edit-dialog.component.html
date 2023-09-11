@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Edit record</h1>
 <div mat-dialog-content class="dialog-content">
 
-  <form *ngIf="categories.length > 0"
+  <form *ngIf="categories$ | async as categories"
         [formGroup]="recordEditForm"
         role="form"
         (submit)="updateRecord()">
@@ -49,16 +49,4 @@
     </div>
 
   </form>
-
-
-
-
-
-
-
-
-
-
-
-
 </div>

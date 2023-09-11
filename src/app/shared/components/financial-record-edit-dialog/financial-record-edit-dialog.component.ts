@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CategoryService } from '@core/services/category.service';
@@ -8,7 +8,7 @@ import { Amount, CategoryName, FinancialRecordType } from '@shared/models/common
 import { FinancialRecordId, UpdateFinancialRecordRequest } from '@shared/models/financial-record.model';
 import * as dayjs from 'dayjs';
 import * as customParseFormat from 'dayjs/plugin/customParseFormat';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
@@ -16,14 +16,14 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
   templateUrl: './financial-record-edit-dialog.component.html',
   styleUrls: ['./financial-record-edit-dialog.component.scss']
 })
-export class FinancialRecordEditDialogComponent implements OnInit {
+export class FinancialRecordEditDialogComponent implements OnInit, OnDestroy {
 
   recordEditForm: FormGroup;
 
   @ViewChild(FormGroupDirective)
   formGroupDirective: FormGroupDirective;
 
-  categories: Category[] = [];
+  categories$: Observable<Category[]>;
 
   private subscriptions: Subscription[] = [];
 
@@ -36,6 +36,10 @@ export class FinancialRecordEditDialogComponent implements OnInit {
   ngOnInit() {
     this.loadCategories();
     this.recordEditForm = this.getForm();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   updateRecord() {
@@ -51,8 +55,7 @@ export class FinancialRecordEditDialogComponent implements OnInit {
   }
 
   loadCategories() {
-    this.subscriptions.push(this.categoryService.getByType(this.data.recordType)
-      .subscribe(categories => this.categories = categories));
+    this.categories$ = this.categoryService.getByType(this.data.recordType);
   }
 
   getForm(): FormGroup {

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CategorySummary } from '@shared/models/analysis.model';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 import { Observable, Subscription, debounce, fromEvent, timer } from 'rxjs';
@@ -8,7 +8,7 @@ import { Observable, Subscription, debounce, fromEvent, timer } from 'rxjs';
   templateUrl: './summary-by-category-chart.component.html',
   styleUrls: ['./summary-by-category-chart.component.scss']
 })
-export class SummaryChartComponent implements OnInit, OnChanges, OnDestroy {
+export class SummaryChartComponent implements OnInit, OnDestroy {
 
   @Input()
   summaries: CategorySummary[];
@@ -23,9 +23,7 @@ export class SummaryChartComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     Chart.register(...registerables);
 
-    if (this.summaries.length > 0) {
-      this.loadChart();
-    }
+    this.loadChart();
 
     this.windowWidth = window.innerWidth
 
@@ -42,17 +40,12 @@ export class SummaryChartComponent implements OnInit, OnChanges, OnDestroy {
       })
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.reloadChart();
-  }
-
   reloadChart(): void {
     if (this.chart) {
       this.chart.destroy();
     }
-    if (this.summaries.length > 0) {
-      this.loadChart();
-    }
+
+    this.loadChart();
   }
 
   ngOnDestroy(): void {

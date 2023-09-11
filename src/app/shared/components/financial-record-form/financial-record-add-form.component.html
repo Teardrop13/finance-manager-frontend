@@ -1,4 +1,4 @@
-<form *ngIf="categories.length > 0"
+<form *ngIf="(categories$ | async) as categories"
       [formGroup]="recordAddForm"
       role="form"
       (submit)="addRecord()">

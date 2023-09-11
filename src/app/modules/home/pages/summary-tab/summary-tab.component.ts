@@ -3,6 +3,7 @@ import { AnalysisService } from '@core/services/analysis.service';
 import { AccountingPeriod } from '@shared/models/accounting-period.model';
 import { CategorySummary } from '@shared/models/analysis.model';
 import { FinancialRecordType } from '@shared/models/common.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-summary-tab',
@@ -14,7 +15,7 @@ export class SummaryTabComponent {
   recordType: FinancialRecordType = 'expense';
   selectedPeriod: AccountingPeriod;
 
-  summaries: CategorySummary[] = [];
+  summaries$: Observable<CategorySummary[]>;
 
   constructor(private analysisService: AnalysisService) {}
 
@@ -29,9 +30,7 @@ export class SummaryTabComponent {
   }
 
   loadSummary() {
-    this.analysisService.getSummaryByCategory(this.recordType, this.selectedPeriod).subscribe({
-      next: summaries => this.summaries = summaries
-    });
+    this.summaries$ = this.analysisService.getSummaryByCategory(this.recordType, this.selectedPeriod);
   }
 
 }

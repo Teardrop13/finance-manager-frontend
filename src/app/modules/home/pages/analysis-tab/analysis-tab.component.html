@@ -1,3 +1,5 @@
 <app-period-selector (onPeriodSelected)="changePeriod($event)"></app-period-selector>
 
-<app-accounting-period-summary-chart [summary]="summary"></app-accounting-period-summary-chart>
+<ng-container *ngIf="summary$ | async as summary">
+  <app-accounting-period-summary-chart [summary]="summary"></app-accounting-period-summary-chart>
+</ng-container>

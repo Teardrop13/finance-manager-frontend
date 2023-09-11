@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(private authentication: AuthenticationService,
     private tokenSharing: TokenSharing) {
     tokenSharing.requestToken();
-    registerLocaleData(localePl)
+    registerLocaleData(localePl);
   }
 
   isAuthenticated() {

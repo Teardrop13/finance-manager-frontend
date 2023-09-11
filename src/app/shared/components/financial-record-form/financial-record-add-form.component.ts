@@ -6,7 +6,7 @@ import { Category } from '@shared/models/category.model';
 import { Amount, CategoryName, FinancialRecordType } from '@shared/models/common.model';
 import { CreateFinancialRecordRequest, FinancialRecord } from '@shared/models/financial-record.model';
 import * as dayjs from 'dayjs';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-financial-record-add-form',
@@ -21,7 +21,7 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
   @Output()
   onSubmit = new EventEmitter<FinancialRecord>();
 
-  categories: Category[] = [];
+  categories$: Observable<Category[]>;
 
   recordAddForm: FormGroup;
 
@@ -50,12 +50,7 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
   }
 
   loadCategories() {
-    this.subscriptions.push(this.categoryService.getByType(this.type)
-      .subscribe({
-        next: categories => {
-          this.categories = categories;
-        }
-      }));
+    this.categories$ = this.categoryService.getByType(this.type);
   }
 
   addRecord() {

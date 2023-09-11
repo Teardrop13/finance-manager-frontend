@@ -2,6 +2,8 @@
 
 <app-record-type-select (onTypeChanged)="changeRecordType($event)"></app-record-type-select>
 
-<app-summary-by-category-chart [summaries]="summaries"></app-summary-by-category-chart>
+<ng-container *ngIf="summaries$ | async as summaries">
+  <app-summary-by-category-chart [summaries]="summaries"></app-summary-by-category-chart>
+</ng-container>
 
 <app-financial-record-add-form [type]="recordType" (onSubmit)="loadSummary()"></app-financial-record-add-form>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AnalysisService } from '@core/services/analysis.service';
 import { AccountingPeriod } from '@shared/models/accounting-period.model';
 import { AccountingPeriodSummary } from '@shared/models/analysis.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-analysis-tab',
@@ -11,7 +12,7 @@ import { AccountingPeriodSummary } from '@shared/models/analysis.model';
 export class AnalysisTabComponent {
 
   selectedPeriod: AccountingPeriod;
-  summary: AccountingPeriodSummary;
+  summary$: Observable<AccountingPeriodSummary>;
 
 
   constructor(private analysisService: AnalysisService) {}
@@ -22,9 +23,7 @@ export class AnalysisTabComponent {
   }
 
   loadSummary() {
-    this.analysisService.getSummaryByType(this.selectedPeriod).subscribe({
-      next: summary => this.summary = summary
-    });
+    this.summary$ = this.analysisService.getSummaryByType(this.selectedPeriod);
   }
 
 }
