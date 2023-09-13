@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { MaterialModule } from '@material/material.module';
 import { HomeRoutingModule } from './home-routing.module';
-import { AnalysisTabComponent } from './pages/analysis-tab/analysis-tab.component';
-import { CategoryEditorTabComponent } from './pages/category-editor-tab/category-editor-tab.component';
-import { HistoryTabComponent } from './pages/history-tab/history-tab.component';
-import { SummaryTabComponent } from './pages/summary-tab/summary-tab.component';
+import { CategoryEditorTabComponent } from '@features/category-editor/category-editor-tab.component';
+import { AnalysisTabComponent } from '@features/analysis/analysis-tab.component';
+import { HistoryTabComponent } from '@features/history/history-tab.component';
+import { SummaryTabComponent } from '@features/summary/summary-tab.component';
 
 
 
