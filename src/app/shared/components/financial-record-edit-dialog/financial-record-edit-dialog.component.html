@@ -20,7 +20,6 @@
     <mat-form-field appearance="outline">
       <mat-label>Date</mat-label>
       <input matInput formControlName="transactionDate" [matDatepicker]="picker">
-      <mat-hint>DD-MM-YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="recordEditForm.get('transactionDate')?.hasError('required')">
