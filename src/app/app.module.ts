@@ -21,7 +21,7 @@ import { AppComponent } from './app.component';
   providers: [{
     provide: LOCALE_ID,
     useValue: 'pl'
-   }],
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

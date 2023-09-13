@@ -3,7 +3,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
-import { MaterialModule } from '../material/material.module';
+import { MaterialModule } from '@material/material.module';
 import { EnsureModuleLoadedOnceGuard } from './EnsureModuleLoadedOnceGuard';
 import { LoginComponent } from './authentication/components/login/login.component';
 import { RegistrationComponent } from './authentication/components/registration/registration.component';

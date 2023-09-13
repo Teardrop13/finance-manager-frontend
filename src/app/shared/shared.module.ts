@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MaterialModule } from '../material/material.module';
+import { MaterialModule } from '@material/material.module';
 import { AccountingPeriodSummaryChartComponent } from './components/accounting-period-summary-chart/accounting-period-summary-chart.component';
 import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { FinancialRecordAddFormComponent } from './components/financial-record-form/financial-record-add-form.component';
