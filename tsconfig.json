@@ -26,8 +26,8 @@
       "dom"
     ],
     "paths": {
-      "@modules/*": [
-        "src/app/modules/*"
+      "@features/*": [
+        "src/app/features/*"
       ],
       "@core/*": [
         "src/app/core/*"
