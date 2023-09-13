@@ -34,7 +34,7 @@ export class TokenSharing implements OnDestroy {
         const { token } = event.data;
         if (token) {
           this.authentication.saveToken(token);
-          this.router.navigateByUrl("home/summary");
+          this.router.navigateByUrl("summary");
         }
       }
     });

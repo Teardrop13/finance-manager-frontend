@@ -19,7 +19,7 @@ export class AuthenticationService {
           let token = res.sessionId
           if (token) {
             this.saveToken(token);
-            this.router.navigateByUrl('home');
+            this.router.navigateByUrl('summary');
           }
         },
         error: () => {
