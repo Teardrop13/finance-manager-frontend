@@ -4,12 +4,14 @@ import { MaterialModule } from '@material/material.module';
 import { SharedModule } from '@shared/shared.module';
 import { AnalysisTabRoutingModule } from './analysis-tab-routing.module';
 import { AnalysisTabComponent } from './analysis-tab.component';
+import { AccountingPeriodSummaryChartComponent } from './accounting-period-summary-chart/accounting-period-summary-chart.component';
 
 
 
 @NgModule({
   declarations: [
-    AnalysisTabComponent
+    AnalysisTabComponent,
+    AccountingPeriodSummaryChartComponent
   ],
   imports: [
     CommonModule,

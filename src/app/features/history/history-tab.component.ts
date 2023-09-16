@@ -5,11 +5,11 @@ import { Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { FinancialRecordService } from '@core/services/financial-record.service';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
-import { FinancialRecordEditDialogComponent } from '@shared/components/financial-record-edit-dialog/financial-record-edit-dialog.component';
 import { AccountingPeriod } from '@shared/models/accounting-period.model';
 import { FinancialRecordType } from '@shared/models/common.model';
 import { FinancialRecord } from '@shared/models/financial-record.model';
 import { Subscription } from 'rxjs';
+import { FinancialRecordEditDialogComponent } from './financial-record-edit-dialog/financial-record-edit-dialog.component';
 @Component({
   selector: 'app-history-tab',
   templateUrl: './history-tab.component.html',

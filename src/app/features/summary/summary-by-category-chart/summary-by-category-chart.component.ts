@@ -9,7 +9,7 @@ import { Observable, Subscription, debounce, fromEvent, timer } from 'rxjs';
   templateUrl: './summary-by-category-chart.component.html',
   styleUrls: ['./summary-by-category-chart.component.scss']
 })
-export class SummaryChartComponent implements OnInit, OnDestroy {
+export class SummaryByCategoryChartComponent implements OnInit, OnDestroy {
 
   @Input()
   summaries: CategorySummary[];

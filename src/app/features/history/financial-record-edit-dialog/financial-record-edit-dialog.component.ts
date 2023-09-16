@@ -10,7 +10,7 @@ import BigNumber from 'bignumber.js';
 import * as dayjs from 'dayjs';
 import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 import { Observable, Subscription } from 'rxjs';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-financial-record-edit-dialog',
