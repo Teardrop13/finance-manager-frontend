@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AccountingPeriodSummary } from '@shared/models/analysis.model';
+import BigNumber from 'bignumber.js';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 import { Observable, Subscription, debounce, fromEvent, timer } from 'rxjs';
 
@@ -67,13 +68,22 @@ export class AccountingPeriodSummaryChartComponent implements OnInit, OnDestroy 
         datasets: [
           {
             label: "Income",
-            data: [summary.income]
+            data: [summary.income.toNumber()]
           },
           {
             label: "Expense",
-            data: [summary.expense]
+            data: [summary.expense.toNumber()]
           }
         ]
+      },
+      options: {
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: (item) => new BigNumber(`${item.raw}`).toFormat()
+            }
+          }
+        }
       }
     };
   }

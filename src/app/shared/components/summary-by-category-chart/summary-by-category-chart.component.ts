@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CategorySummary } from '@shared/models/analysis.model';
+import BigNumber from 'bignumber.js';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 import { Observable, Subscription, debounce, fromEvent, timer } from 'rxjs';
 
@@ -66,9 +67,18 @@ export class SummaryChartComponent implements OnInit, OnDestroy {
         labels: summaries.map(s => s.category),
         datasets: [
           {
-            data: summaries.map(s => s.amount)
+            data: summaries.map(s => s.amount.toNumber())
           }
         ]
+      },
+      options: {
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: (item) => new BigNumber(`${item.raw}`).toFormat()
+            }
+          }
+        }
       }
     };
   }

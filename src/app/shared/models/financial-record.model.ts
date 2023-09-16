@@ -1,15 +1,16 @@
-import { Amount, Brand, CategoryName, FinancialRecordType } from "./common.model";
+import BigNumber from "bignumber.js";
+import { Brand, CategoryName, FinancialRecordType } from "./common.model";
 
 export interface UpdateFinancialRecordRequest {
   description: string | null,
-  amount: Amount,
+  amount: BigNumber,
   category: CategoryName,
   transactionDate: string,
 }
 
 export interface CreateFinancialRecordRequest {
   description: string | undefined,
-  amount: Amount,
+  amount: BigNumber,
   category: CategoryName,
   type: FinancialRecordType,
   transactionDate: string,
@@ -22,10 +23,10 @@ export interface FinancialRecordsHistory {
 
 export interface FinancialRecord {
   id: FinancialRecordId,
-  amount: Amount,
+  amount: BigNumber,
   transactionDate: string,
   category: CategoryName,
-  description?: string,
+  description: string | null,
   type: FinancialRecordType,
 }
 

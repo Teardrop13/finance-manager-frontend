@@ -71,14 +71,7 @@ export class HistoryTabComponent implements OnDestroy {
   editRecord(record: FinancialRecord) {
     this.dialog.open(FinancialRecordEditDialogComponent, {
       data: {
-        updateRequest: {
-          description: record.description,
-          amount: record.amount,
-          category: record.category,
-          transactionDate: record.transactionDate
-        },
-        recordId: record.id,
-        recordType: record.type,
+        record: record,
         onSave: () => this.loadRecords()
       }
     });

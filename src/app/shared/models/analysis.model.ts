@@ -1,14 +1,15 @@
+import BigNumber from "bignumber.js";
 import { AccountingPeriodId } from "./accounting-period.model";
-import { Amount, CategoryName } from "./common.model";
+import { CategoryName } from "./common.model";
 
 export interface CategorySummary {
   category: CategoryName,
-  amount: Amount
+  amount: BigNumber
 }
 
 export interface AccountingPeriodSummary {
-  income: Amount,
-  expense: Amount
+  income: BigNumber,
+  expense: BigNumber,
   startsOn: string,
   endsOn: string,
   accountingPeriodId: AccountingPeriodId

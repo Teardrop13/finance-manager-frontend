@@ -1,8 +1,9 @@
 import { registerLocaleData } from '@angular/common';
+import localePl from '@angular/common/locales/pl';
 import { Component } from '@angular/core';
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
 import { TokenSharing } from '@core/authentication/services/token-sharing.service';
-import localePl from '@angular/common/locales/pl';
+import BigNumber from 'bignumber.js';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,6 +16,12 @@ export class AppComponent {
     private tokenSharing: TokenSharing) {
     tokenSharing.requestToken();
     registerLocaleData(localePl);
+
+    BigNumber.config({
+      FORMAT: {
+        decimalSeparator: ','
+      }
+    });
   }
 
   isAuthenticated() {

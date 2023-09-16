@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { AccountingPeriod } from '@shared/models/accounting-period.model';
 import { FinancialRecordType } from '@shared/models/common.model';
 import { CreateFinancialRecordRequest, FinancialRecord, FinancialRecordId, FinancialRecordsHistory, UpdateFinancialRecordRequest } from '@shared/models/financial-record.model';
-import { Observable } from 'rxjs';
+import BigNumber from 'bignumber.js';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,16 @@ export class FinancialRecordService {
       .append("sortBy", sortBy)
       .append("isAscending", isAscending);
 
-    return this.http.get<FinancialRecordsHistory>('/api/records', { params: params });
+    return this.http.get<FinancialRecordsHistory>('/api/records', { params: params })
+      .pipe(
+        map(history => ({
+          ...history,
+          records: history.records.map(record => ({
+            ...record,
+            amount: new BigNumber(record.amount)
+          }))
+        }))
+      );
   }
 
   delete(id: FinancialRecordId) {

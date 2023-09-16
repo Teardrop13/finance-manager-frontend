@@ -3,8 +3,9 @@ import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular
 import { CategoryService } from '@core/services/category.service';
 import { FinancialRecordService } from '@core/services/financial-record.service';
 import { Category } from '@shared/models/category.model';
-import { Amount, CategoryName, FinancialRecordType } from '@shared/models/common.model';
+import { CategoryName, FinancialRecordType } from '@shared/models/common.model';
 import { CreateFinancialRecordRequest, FinancialRecord } from '@shared/models/financial-record.model';
+import BigNumber from 'bignumber.js';
 import * as dayjs from 'dayjs';
 import { Observable, Subscription } from 'rxjs';
 
@@ -55,9 +56,16 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
 
   addRecord() {
     if (this.recordAddForm.valid) {
-      const request: CreateFinancialRecordRequest = this.recordAddForm.value;
-      request.type = this.type;
-      request.transactionDate = dayjs(request.transactionDate).format('DD-MM-YYYY');
+      const form = this.recordAddForm.value;
+
+      const request: CreateFinancialRecordRequest = {
+        type: this.type,
+        amount: new BigNumber(form.amount.replace(',', '.')),
+        transactionDate: dayjs(form.transactionDate).format('DD-MM-YYYY'),
+        category: form.category,
+        description: form.description,
+      };
+
       this.subscriptions.push(this.financialRecordService.create(request)
         .subscribe({
           next: r => {
@@ -75,7 +83,7 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
 
   getForm(): FormGroup {
     return new FormGroup({
-      amount: new FormControl<Amount | null>(null, [Validators.required, Validators.min(0)]),
+      amount: new FormControl<string | null>(null, [Validators.required]),
       transactionDate: new FormControl<Date | null>(new Date(), [Validators.required]),
       category: new FormControl<CategoryName | null>(null, [Validators.required]),
       description: new FormControl<string | null>(null, []),
