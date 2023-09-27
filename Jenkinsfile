@@ -2,14 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Install') {
-            when { changeset "package.json"}
-            steps {
-                sh 'npm install'
-            }
-        }
         stage('Build') {
             steps {
+                sh 'npm install'
                 sh 'npm run build-prod'
             }
         }
