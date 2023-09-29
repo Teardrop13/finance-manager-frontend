@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
 
+  submitted = false;
   registerForm: FormGroup;
   private subscriptions: Subscription[] = [];
 
@@ -30,8 +31,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   register() {
-    if (this.registerForm.valid) {
-      this.subscriptions.push(this.authentication.register(this.registerForm.value)
+    if (!this.registerForm.valid) {
+      return
+    }
+
+    this.submitted = true;
+    this.subscriptions.push(this.authentication.register(this.registerForm.value)
         .subscribe(
           {
             next: res => {
@@ -41,10 +46,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
                 this.router.navigateByUrl('/login');
               }
             },
-            error: () => alert('Failed to register')
+            error: () => {
+              this.submitted = false;
+              return alert('Failed to register');
+            }
           }
         ));
-    }
   }
 
   isNotMatched() {

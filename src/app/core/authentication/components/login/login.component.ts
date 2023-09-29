@@ -9,6 +9,8 @@ import { AuthenticationService } from '@core/authentication/services/authenticat
 })
 export class LoginComponent implements OnInit {
 
+  submitted = false;
+
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -20,9 +22,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this.loginForm.valid) {
-      this.authentication.login(this.loginForm.value);
+    if (!this.loginForm.valid) {
+      return;
     }
+    this.submitted = true;
+    this.authentication.login(this.loginForm.value);
   }
 
 }

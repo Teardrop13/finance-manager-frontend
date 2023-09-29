@@ -13,20 +13,21 @@ export class AuthenticationService {
     private router: Router) {}
 
   login(loginRequest: LoginRequest) {
-    this.http.post<LoginResponse>('/api/auth/login', loginRequest).subscribe(
-      {
-        next: res => {
-          let token = res.sessionId
-          if (token) {
-            this.saveToken(token);
-            this.router.navigateByUrl('summary');
+    this.http.post<LoginResponse>('/api/auth/login', loginRequest)
+      .subscribe(
+        {
+          next: res => {
+            let token = res.sessionId
+            if (token) {
+              this.saveToken(token);
+              this.router.navigateByUrl('summary');
+            }
+          },
+          error: () => {
+            alert("Authentication failed.");
           }
-        },
-        error: () => {
-          alert("Authentication failed.");
         }
-      }
-    );
+      );
   }
 
   logout() {

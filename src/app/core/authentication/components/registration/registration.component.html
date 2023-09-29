@@ -33,7 +33,11 @@
     </mat-error>
   </mat-form-field>
 
-  <button type="submit" mat-flat-button color="primary">Sign up</button>
+  <button 
+  type="submit"
+   mat-flat-button 
+   color="primary"
+   [disabled]="submitted || !registerForm.valid">Sign up</button>
 
   <div>
     Already have an account? <a href="login" class="link-btn">Log in</a>
