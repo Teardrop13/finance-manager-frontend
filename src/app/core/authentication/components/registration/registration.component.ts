@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
 import { Subscription } from 'rxjs';
@@ -15,8 +16,11 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   registerForm: FormGroup;
   private subscriptions: Subscription[] = [];
 
-  constructor(private authentication: AuthenticationService,
-    private router: Router) {}
+  constructor(
+    private authentication: AuthenticationService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -37,21 +41,25 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
     this.submitted = true;
     this.subscriptions.push(this.authentication.register(this.registerForm.value)
-        .subscribe(
-          {
-            next: res => {
-              if (res.error) {
-                alert('Failed to register');
-              } else {
-                this.router.navigateByUrl('/login');
-              }
-            },
-            error: () => {
+      .subscribe(
+        {
+          next: res => {
+            if (res.error) {
+              alert('Failed to register');
               this.submitted = false;
-              return alert('Failed to register');
+            } else {
+              this.snackBar.open("Your account has been successfully created! Now you can log in.", "Close", {
+                duration: 5000
+              });
+              this.router.navigateByUrl('/login');
             }
+          },
+          error: () => {
+            this.submitted = false;
+            return alert('Failed to register');
           }
-        ));
+        }
+      ));
   }
 
   isNotMatched() {
