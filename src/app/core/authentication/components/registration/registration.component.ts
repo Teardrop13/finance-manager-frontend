@@ -43,20 +43,17 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.authentication.register(this.registerForm.value)
       .subscribe(
         {
-          next: res => {
-            if (res.error) {
-              alert('Failed to register');
-              this.submitted = false;
-            } else {
-              this.snackBar.open("Your account has been successfully created! Now you can log in.", "Close", {
-                duration: 5000
-              });
-              this.router.navigateByUrl('/login');
-            }
+          next: () => {
+            this.snackBar.open("Your account has been successfully created! Now you can log in.", "Close", {
+              duration: 5000
+            });
+            this.router.navigateByUrl('/login');
           },
           error: () => {
             this.submitted = false;
-            return alert('Failed to register');
+            this.snackBar.open("Failed to register!", "Close", {
+              duration: 5000
+            });
           }
         }
       ));

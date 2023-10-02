@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay, tap } from 'rxjs';
 import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../models/authentication.model';
 
 @Injectable({
@@ -9,31 +8,28 @@ import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '
 })
 export class AuthenticationService {
 
-  constructor(private http: HttpClient,
-    private router: Router) {}
+  constructor(private http: HttpClient) {}
 
-  login(loginRequest: LoginRequest) {
-    this.http.post<LoginResponse>('/api/auth/login', loginRequest)
-      .subscribe(
-        {
-          next: res => {
-            let token = res.sessionId
-            if (token) {
-              this.saveToken(token);
-              this.router.navigateByUrl('summary');
-            }
-          },
-          error: () => {
-            alert("Authentication failed.");
+  login(loginRequest: LoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>('/api/auth/login', loginRequest)
+      .pipe(
+        tap(res => {
+          let token = res.sessionId
+          if (token) {
+            this.saveToken(token);
+          } else {
+            throw Error('Token is not present')
           }
-        }
-      );
+        }),
+        shareReplay());
   }
 
-  logout() {
-    this.http.post('/api/auth/logout', null).subscribe();
-    this.removeToken();
-    this.router.navigateByUrl('/login');
+  logout(): Observable<void> {
+    return this.http.post<void>('/api/auth/logout', null)
+      .pipe(
+        tap(() => this.removeToken()),
+        shareReplay()
+      );
   }
 
   register(registerRequest: RegisterRequest): Observable<RegisterResponse> {
@@ -53,9 +49,6 @@ export class AuthenticationService {
   }
 
   public saveToken(token: string) {
-    sessionStorage.setItem(
-      'token',
-      token
-    );
+    sessionStorage.setItem('token', token);
   }
 }
