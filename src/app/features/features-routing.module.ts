@@ -17,6 +17,11 @@ const routes: Routes = [
   {
     path: 'history',
     loadChildren: () => import('@features/history/history.module').then(m => m.HistoryModule)
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'summary'
   }
 ];
 

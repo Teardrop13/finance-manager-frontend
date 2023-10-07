@@ -4,14 +4,6 @@
       (submit)="register()">
 
   <mat-form-field class="form-input">
-    <mat-label>Username</mat-label>
-    <input type="text" matInput formControlName="username">
-    <mat-error *ngIf="registerForm.get('username')?.hasError('required')">
-      Username is required
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="form-input">
     <mat-label>Email</mat-label>
     <input type="email" matInput formControlName="email">
     <mat-error *ngIf="registerForm.get('email')?.hasError('email') && !registerForm.get('email')?.hasError('required')">

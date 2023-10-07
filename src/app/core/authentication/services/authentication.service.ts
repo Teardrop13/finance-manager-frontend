@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, shareReplay, tap } from 'rxjs';
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '../models/authentication.model';
+import { Observable, shareReplay, tap, throwError } from 'rxjs';
+import { LoginRequest, LoginResponse, RefreshJwtRequest, RefreshJwtResponse, RegisterRequest, RegisterResponse } from '../models/authentication.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,10 @@ export class AuthenticationService {
     return this.http.post<LoginResponse>('/api/auth/login', loginRequest)
       .pipe(
         tap(res => {
-          let token = res.sessionId
-          if (token) {
-            this.saveToken(token);
+          let jwt = res.jwt
+          let refreshToken = res.refreshToken;
+          if (jwt && refreshToken) {
+            this.saveAuthorizationData(jwt, refreshToken);
           } else {
             throw Error('Token is not present')
           }
@@ -27,7 +28,7 @@ export class AuthenticationService {
   logout(): Observable<void> {
     return this.http.post<void>('/api/auth/logout', null)
       .pipe(
-        tap(() => this.removeToken()),
+        tap(() => this.removeAuthorizationData()),
         shareReplay()
       );
   }
@@ -37,18 +38,41 @@ export class AuthenticationService {
   }
 
   isAuthenticated(): boolean {
-    return this.getToken() != null;
+    return this.getJwt() != null;
   }
 
-  getToken(): string | null {
-    return sessionStorage.getItem('token');
+  getJwt(): string | null {
+    return localStorage.getItem('jwt');
   }
 
-  removeToken() {
-    sessionStorage.removeItem('token');
+  getRefreshToken() {
+    return localStorage.getItem('refreshToken');
   }
 
-  public saveToken(token: string) {
-    sessionStorage.setItem('token', token);
+  removeAuthorizationData() {
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('refreshToken');
+  }
+
+  saveAuthorizationData(jwt: string, refreshToken: string) {
+    localStorage.setItem('jwt', jwt);
+    localStorage.setItem('refreshToken', refreshToken);
+  }
+
+  refreshJwt(): Observable<RefreshJwtResponse> {
+    const refreshToken = this.getRefreshToken();
+
+    if (!refreshToken) {
+      return throwError(() => new Error('Refresh token is available'));
+    }
+
+    const request: RefreshJwtRequest = {
+      refreshToken: refreshToken
+    }
+
+    return this.http.post<RefreshJwtResponse>('/api/auth/refresh-jwt', request)
+      .pipe(tap(res => {
+        this.saveAuthorizationData(res.jwt, res.refreshToken);
+      }));
   }
 }

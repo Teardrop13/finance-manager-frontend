@@ -4,15 +4,24 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
-  sessionId?: string;
+  jwt: string,
+  refreshToken: string
 }
 
 export interface RegisterRequest {
-  email?: string | null;
-  username?: string | null;
-  password?: string | null;
+  email?: string | null,
+  password?: string | null
 }
 
 export interface RegisterResponse {
   error?: string
+}
+
+export interface RefreshJwtRequest {
+  refreshToken: string
+}
+
+export interface RefreshJwtResponse {
+  jwt: string,
+  refreshToken: string
 }
