@@ -21,4 +21,14 @@ export interface UpdateCategoryRequest {
   name: CategoryName
 }
 
+export interface ReorderCategoriesRequest {
+  reorderCategoryRequests: ReorderCategoryRequest[]
+}
+
+export interface ReorderCategoryRequest {
+  id: CategoryId,
+  priority: number
+}
+
+
 export type CategoryId = Brand<number, 'CategoryId'>
