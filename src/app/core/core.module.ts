@@ -9,12 +9,16 @@ import { LoginComponent } from './authentication/components/login/login.componen
 import { RegistrationComponent } from './authentication/components/registration/registration.component';
 import { NavbarComponent } from './header/navbar/navbar.component';
 import { AuthenticationInterceptorService } from './interceptors/authentication-interceptor.service';
+import { SidenavComponent } from './header/sidenav/sidenav.component';
+import { HomeComponent } from './layout/home/home.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegistrationComponent,
     NavbarComponent,
+    SidenavComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +28,8 @@ import { AuthenticationInterceptorService } from './interceptors/authentication-
     RouterModule
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
+    SidenavComponent
   ],
   providers: [
     {

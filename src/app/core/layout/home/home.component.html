@@ -1,0 +1,15 @@
+<div style="overflow: hidden;">
+  <app-navbar (onToggleMenuButtonClick)="drawer.toggle()"></app-navbar>
+
+  <mat-drawer-container autosize fullscreen style="overflow: hidden; margin-top: var(--mat-toolbar-standard-height);">
+
+    <mat-drawer #drawer opened [mode]="getMode()" style="overflow: hidden; position: fixed; margin-top: var(--mat-toolbar-standard-height);">
+      <app-sidenav (onMenuButtonClick)="windowWidth < 800 && drawer.toggle()"></app-sidenav>
+    </mat-drawer>
+
+    <div style="overflow-y: auto;">
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-drawer-container>
+</div>

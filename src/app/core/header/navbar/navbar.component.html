@@ -1,23 +1,15 @@
 <div class="navbar">
   <mat-toolbar color="primary">
-    <div class="menu">
-      <a [routerLink]="'/summary'" mat-button>Summary</a>
-      <a [routerLink]="'/categories'" mat-button>Categories</a>
-      <a [routerLink]="'/analysis'" mat-button>Analysis</a>
-      <a [routerLink]="'/history'" mat-button>History</a>
-      <a (click)="logout()" mat-button>Log out</a>
-    </div>
+
     <div class="menu-toggle">
       <button mat-icon-button (click)="toggleMenu()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
+    
+    <div class="menu">
+      <a (click)="logout()" mat-button>Log out</a>
+    </div>
+
   </mat-toolbar>
-  <div *ngIf="showMenu" class="menu-dropdown">
-    <a [routerLink]="'/summary'" mat-button (click)="toggleMenu()">Summary</a>
-    <a [routerLink]="'/categories'" mat-button (click)="toggleMenu()">Categories</a>
-    <a [routerLink]="'/analysis'" mat-button (click)="toggleMenu()">Analysis</a>
-    <a [routerLink]="'/history'" mat-button (click)="toggleMenu()">History</a>
-    <a (click)="logout()" mat-button>Log out</a>
-  </div>
 </div>

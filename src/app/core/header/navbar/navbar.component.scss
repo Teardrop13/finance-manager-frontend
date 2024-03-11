@@ -1,5 +1,5 @@
 .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 2;
     width: 100%;
@@ -8,30 +8,5 @@
 
 a {
     text-decoration: none;
-}
-
-.menu-toggle {
-    display: none;
-}
-
-.menu-dropdown {
-    display: none;
-}
-
-@media screen and (max-width: 800px) {
-    .menu {
-        display: none;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .menu-dropdown {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        align-items: stretch;
-    }
 }
 

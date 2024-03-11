@@ -18,6 +18,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDividerModule} from '@angular/material/divider';
 @NgModule({
   declarations: [],
   imports: [
@@ -38,7 +39,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatRadioModule,
     DragDropModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDividerModule
   ],
   exports: [
     CommonModule,
@@ -57,7 +59,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatRadioModule,
     DragDropModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDividerModule
   ],
   providers: [
     MatSnackBar

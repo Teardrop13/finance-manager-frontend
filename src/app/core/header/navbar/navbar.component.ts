@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@core/authentication/services/authentication.service';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,9 @@ import { Subscription } from 'rxjs';
 })
 export class NavbarComponent implements OnDestroy {
 
-  showMenu = false;
+  @Output()
+  onToggleMenuButtonClick = new EventEmitter();
+
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -23,7 +25,7 @@ export class NavbarComponent implements OnDestroy {
   }
 
   toggleMenu() {
-    this.showMenu = !this.showMenu;
+    this.onToggleMenuButtonClick.emit();
   }
 
   logout() {

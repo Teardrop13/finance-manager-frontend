@@ -1,0 +1,12 @@
+div a {
+    min-width: 20vw;
+    justify-content: start;
+    padding: 0 2rem;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 800px) {
+    div a {
+        min-width: 60vw;
+    }
+}
