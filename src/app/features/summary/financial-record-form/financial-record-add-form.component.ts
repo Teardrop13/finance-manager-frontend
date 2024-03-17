@@ -36,7 +36,7 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
 
   ngOnInit() {
     this.loadCategories();
-    this.recordAddForm = this.getForm();
+    this.recordAddForm = this.getNewForm();
   }
 
   ngOnDestroy(): void {
@@ -46,7 +46,7 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
   ngOnChanges(changes: SimpleChanges): void {
     this.loadCategories();
     if (this.recordAddForm) {
-      this.resetForm();
+      this.resetAll();
     }
   }
 
@@ -70,18 +70,30 @@ export class FinancialRecordAddFormComponent implements OnInit, OnDestroy, OnCha
         .subscribe({
           next: r => {
             this.onSubmit.emit(r);
-            this.resetForm();
+            this.resetValueAndDescription();
           }
         }));
     }
   }
 
-  resetForm() {
-    this.formGroupDirective.resetForm();
-    this.recordAddForm = this.getForm();
+  resetValueAndDescription() {
+    if (this.recordAddForm.valid) {
+      const currentAddForm = this.recordAddForm.value;
+
+      this.resetAll();
+      this.recordAddForm.patchValue({
+        transactionDate: currentAddForm.transactionDate,
+        category: currentAddForm.category
+      })
+    }
   }
 
-  getForm(): FormGroup {
+  resetAll() {
+    this.formGroupDirective.resetForm();
+    this.recordAddForm = this.getNewForm();
+  }
+
+  getNewForm(): FormGroup {
     return new FormGroup({
       amount: new FormControl<string | null>(null, [Validators.required]),
       transactionDate: new FormControl<Date | null>(new Date(), [Validators.required]),
